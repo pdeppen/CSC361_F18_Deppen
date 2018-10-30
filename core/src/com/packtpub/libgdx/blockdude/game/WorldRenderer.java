@@ -22,7 +22,8 @@ public class WorldRenderer implements Disposable
      */
     public WorldRenderer (WorldController worldController) 
     {
-    	
+    		this.worldController = worldController;
+    		init();
     }
     
     /**
@@ -30,7 +31,10 @@ public class WorldRenderer implements Disposable
      */
     private void init () 
     {
-    	
+    		batch = new SpriteBatch();
+    		camera = new OrthographicCamera(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
+    		camera.position.set(0, 0, 0);
+    		camera.update();
     }
     
     /**
@@ -39,7 +43,7 @@ public class WorldRenderer implements Disposable
      */
     public void render () 
     {
-    	
+    		
     }
     
     /**
@@ -50,7 +54,8 @@ public class WorldRenderer implements Disposable
      */
     public void resize (int width, int height) 
     { 
-    	
+    		camera.viewportWidth = (Constants.VIEWPORT_HEIGHT / height) * width;
+    		camera.update();
     }
     
     /**
@@ -60,6 +65,6 @@ public class WorldRenderer implements Disposable
     @Override 
     public void dispose () 
     { 
-    	
+    		batch.dispose();
     }
 }
