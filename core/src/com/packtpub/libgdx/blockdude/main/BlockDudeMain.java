@@ -1,7 +1,6 @@
 package com.packtpub.libgdx.blockdude.main;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.packtpub.libgdx.canyonbunny.CanyonBunnyMain;
 
 /**
  * Created by Philip Deppen (Milestone 1, 10/29/18)
