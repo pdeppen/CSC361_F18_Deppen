@@ -68,6 +68,7 @@ public class Assets implements Disposable, AssetErrorListener
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
+	 * inner class
 	 */
 	public class AssetBlockDude 
 	{
@@ -81,6 +82,7 @@ public class Assets implements Disposable, AssetErrorListener
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
+	 * inner class
 	 */
 	public class AssetBlock
 	{
@@ -94,6 +96,7 @@ public class Assets implements Disposable, AssetErrorListener
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
+	 * inner class
 	 */
 	public class AssetDoor
 	{
@@ -107,6 +110,7 @@ public class Assets implements Disposable, AssetErrorListener
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
+	 * inner class
 	 */
 	public class AssetStar
 	{

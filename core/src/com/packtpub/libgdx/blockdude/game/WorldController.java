@@ -62,17 +62,12 @@ public class WorldController extends InputAdapter
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18, issue 13)
+	 * creates test sprites
 	 */
 	private void initTestObjects()
 	{
 		// Create new array for 5 sprites
 		testSprites = new Sprite[5];
-		// Create empty POT-sized Pixmap w/ 8 bit RGBA pixel data
-		int width = 32;
-		int height = 32;
-		Pixmap pixmap = createProceduralPixmap(width, height);
-		 //Create a new texture from pixmap data
-		Texture texture = new Texture(pixmap);
 		
 		//Create a list of texture regions
 		Array<TextureRegion> regions = new Array<TextureRegion>();
@@ -97,31 +92,10 @@ public class WorldController extends InputAdapter
 		// Set first sprite as selected one
 		selectedSprite = 0;
 	}
-	
+		
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18, issue 13)
-	 * @param width
-	 * @param height
-	 * @return
-	 */
-	private Pixmap createProceduralPixmap (int width, int height) 
-	{
-		Pixmap pixmap = new Pixmap(width, height, Format.RGBA8888);
-		// Fill square with red color at 50% opacity
-		pixmap.setColor(1, 0, 0, 0.5f);
-		pixmap.fill();
-		// Draw a yellow-colored X shape on square
-		pixmap.setColor(1, 1, 0, 1);
-		pixmap.drawLine(0, 0, width, height);
-		pixmap.drawLine(width, 0, 0, height);
-		// Draw a cyan-colored border around square
-		pixmap.setColor(0, 1, 1, 1);
-		pixmap.drawRectangle(0, 0, width, height);
-		return pixmap;
-	}
-	
-	/**
-	 * Created by Philip Deppen (Milestone 1, 10/30/18, issue 13)
+	 * moves sprites when keys are pressed
 	 * @param deltaTime
 	 */
 	private void handleDebugInput (float deltaTime) {
