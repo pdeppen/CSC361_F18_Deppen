@@ -1,6 +1,7 @@
 package com.packtpub.libgdx.blockdude.game;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 import com.packtpub.libgdx.blockdude.util.Constants;
@@ -39,13 +40,32 @@ public class WorldRenderer implements Disposable
     
     /**
      * Created by Philip Deppen (Milestone 1, 10/29/18)
+     * Edited by Philip Deppen (Milestone 1, 10/30/18, issue 14)
      * Defines in which order the game objects are drawn over others
      */
     public void render () 
     {
-    		
+    		renderTestObjects();
     }
     
+    /**
+     * Created by Philip Deppen (Milestone 1, 10/30/18, issue 14)
+     * renders test sprites created in WorldController to screen
+     */
+	private void renderTestObjects() 
+	{
+		worldController.cameraHelper.applyTo(camera);
+		batch.setProjectionMatrix(camera.combined);
+		batch.begin();
+		
+		for(Sprite sprite : worldController.testSprites) 
+		{
+			sprite.draw(batch);
+		}
+		
+		batch.end();
+	}
+	
     /**
      * Created by Philip Deppen (Milestone 1, 10/29/18)
      * this method is called when the screen size is changed

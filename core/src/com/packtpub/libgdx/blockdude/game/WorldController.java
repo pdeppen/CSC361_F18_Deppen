@@ -60,6 +60,9 @@ public class WorldController extends InputAdapter
 		cameraHelper.update(deltaTime);
 	}
 	
+	/**
+	 * Created by Philip Deppen (Milestone 1, 10/30/18, issue 13)
+	 */
 	private void initTestObjects()
 	{
 		// Create new array for 5 sprites
