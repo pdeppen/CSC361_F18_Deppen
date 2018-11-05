@@ -12,7 +12,7 @@ import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
 
 public class DesktopLauncher 
 {
-	private static boolean rebuildAtlas = false;
+	private static boolean rebuildAtlas = true;
 	private static boolean drawDebugOutline = true;
 	
 	public static void main (String[] arg) 
@@ -27,6 +27,7 @@ public class DesktopLauncher
 			
 			TexturePacker.process(settings, "assets-raw/images", "../core/assets/images", "blockdude.pack");
 		}
+	
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "BlockDude";
 		config.width = 800;
