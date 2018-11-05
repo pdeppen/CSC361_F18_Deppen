@@ -71,6 +71,28 @@ public class Assets implements Disposable, AssetErrorListener
 	}
 	
 	/**
+	 * Created by Philip Deppen (Milestone 2, 11/5/18)
+	 * decorates level
+	 */
+	public class AssetLevelDecoration
+	{
+		public final AtlasRegion ufo01;
+		public final AtlasRegion ufo02;
+		public final AtlasRegion tree;
+		public final AtlasRegion ground;
+		public final AtlasRegion sun;
+		
+		public AssetLevelDecoration(TextureAtlas atlas)
+		{
+			ufo01 = atlas.findRegion("ufo1");
+			ufo02 = atlas.findRegion("ufo2");
+			tree = atlas.findRegion("tree");
+			ground = atlas.findRegion("ground");
+			sun = atlas.findRegion("sun");
+		}
+	}
+	
+	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
 	 * inner class
 	 */
@@ -155,6 +177,7 @@ public class Assets implements Disposable, AssetErrorListener
 		}
 	}
 	
+
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
 	 * Handles an error

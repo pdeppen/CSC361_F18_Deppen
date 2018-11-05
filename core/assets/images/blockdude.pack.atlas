@@ -6,77 +6,77 @@ filter: Nearest,Nearest
 repeat: none
 block
   rotate: false
-  xy: 760, 186
+  xy: 2, 2
   size: 70, 66
   orig: 70, 66
   offset: 0, 0
   index: -1
 blockdude
   rotate: false
-  xy: 904, 163
+  xy: 871, 158
   size: 30, 89
   orig: 30, 89
   offset: 0, 0
   index: -1
 brokenblock
   rotate: false
-  xy: 84, 7
+  xy: 760, 181
   size: 70, 66
   orig: 70, 66
   offset: 0, 0
   index: -1
 door
   rotate: false
-  xy: 2, 2
-  size: 80, 71
-  orig: 80, 71
+  xy: 832, 178
+  size: 37, 69
+  orig: 37, 69
   offset: 0, 0
   index: -1
 ground
   rotate: false
-  xy: 386, 177
+  xy: 386, 172
   size: 200, 75
   orig: 200, 75
   offset: 0, 0
   index: -1
 movingblock
   rotate: false
-  xy: 832, 186
+  xy: 74, 2
   size: 70, 66
   orig: 70, 66
   offset: 0, 0
   index: -1
 star
   rotate: false
-  xy: 156, 44
+  xy: 146, 39
   size: 30, 29
   orig: 30, 29
   offset: 0, 0
   index: -1
 sun
   rotate: false
-  xy: 204, 76
+  xy: 204, 71
   size: 180, 176
   orig: 180, 176
   offset: 0, 0
   index: -1
 tree
   rotate: false
-  xy: 2, 75
+  xy: 2, 70
   size: 200, 177
   orig: 200, 177
   offset: 0, 0
   index: -1
 ufo1
   rotate: false
-  xy: 588, 162
+  xy: 588, 157
   size: 170, 90
   orig: 170, 90
   offset: 0, 0
   index: -1
 ufo2
   rotate: false
-  xy: 386, 75
+  xy: 386, 70
   size: 170, 100
   orig: 170, 100
   offset: 0, 0

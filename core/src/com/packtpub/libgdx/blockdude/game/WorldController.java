@@ -62,6 +62,7 @@ public class WorldController extends InputAdapter
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18, issue 13)
+	 * Edited by Philip Deppen (Milestone 2, 11/5/18, issue 20)
 	 * creates test sprites
 	 */
 	private void initTestObjects()
@@ -76,6 +77,7 @@ public class WorldController extends InputAdapter
 		regions.add(Assets.instance.block.block);
 		regions.add(Assets.instance.brokenBlock.brokenBlock);
 		regions.add(Assets.instance.movingBlock.movingBlock);
+		regions.add(Assets.instance.door.door);
 		
 		// Create new sprites using the just created texture
 		for (int i = 0; i < testSprites.length; i++) {
