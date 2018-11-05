@@ -67,14 +67,16 @@ public class WorldController extends InputAdapter
 	private void initTestObjects()
 	{
 		// Create new array for 5 sprites
-		testSprites = new Sprite[5];
+		testSprites = new Sprite[10];
 		
 		//Create a list of texture regions
 		Array<TextureRegion> regions = new Array<TextureRegion>();
 		regions.add(Assets.instance.dude.dude);
 		regions.add(Assets.instance.star.star);
 		regions.add(Assets.instance.block.block);
-
+		regions.add(Assets.instance.brokenBlock.brokenBlock);
+		regions.add(Assets.instance.movingBlock.movingBlock);
+		
 		// Create new sprites using the just created texture
 		for (int i = 0; i < testSprites.length; i++) {
 			Sprite spr = new Sprite(regions.random());

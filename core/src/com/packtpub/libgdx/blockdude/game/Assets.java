@@ -25,6 +25,8 @@ public class Assets implements Disposable, AssetErrorListener
 	public AssetBlock block;
 	public AssetDoor door;
 	public AssetStar star;
+	public AssetBrokenBlock brokenBlock;
+	public AssetMovingBlock movingBlock;
 	
 	// singleton: prevent instantiation from other classes
 	private Assets() {}
@@ -64,6 +66,8 @@ public class Assets implements Disposable, AssetErrorListener
 		block = new AssetBlock(atlas);
 		door = new AssetDoor(atlas);
 		star = new AssetStar(atlas);
+		brokenBlock = new AssetBrokenBlock(atlas);
+		movingBlock = new AssetMovingBlock(atlas);
 	}
 	
 	/**
@@ -95,6 +99,34 @@ public class Assets implements Disposable, AssetErrorListener
 	}
 	
 	/**
+	 * Created by Philip Deppen (Milestone 2, 11/5/18)
+	 * inner class
+	 */
+	public class AssetBrokenBlock
+	{
+		public final AtlasRegion brokenBlock;
+		
+		public AssetBrokenBlock (TextureAtlas atlas)
+		{
+			brokenBlock = atlas.findRegion("brokenblock");
+		}
+	}
+	
+	/**
+	 * Created by Philip Deppen (Milestone 1, 11/5/18)
+	 * inner class
+	 */
+	public class AssetMovingBlock
+	{
+		public final AtlasRegion movingBlock;
+		
+		public AssetMovingBlock (TextureAtlas atlas)
+		{
+			movingBlock = atlas.findRegion("movingblock");
+		}
+	}
+	
+	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
 	 * inner class
 	 */
@@ -107,6 +139,7 @@ public class Assets implements Disposable, AssetErrorListener
 			door = atlas.findRegion("door");
 		}
 	}
+	
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
