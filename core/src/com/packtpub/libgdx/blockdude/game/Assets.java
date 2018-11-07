@@ -7,6 +7,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Disposable;
 import com.packtpub.libgdx.blockdude.util.Constants;
+import com.packtpub.libgdx.blockdude.game.Assets.AssetLevelDecoration;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -28,6 +29,7 @@ public class Assets implements Disposable, AssetErrorListener
 	public AssetBrokenBlock brokenBlock;
 	public AssetMovingBlock movingBlock;
 	public AssetGround ground;
+	public AssetLevelDecoration levelDecoration;
 	
 	// singleton: prevent instantiation from other classes
 	private Assets() {}
@@ -70,6 +72,7 @@ public class Assets implements Disposable, AssetErrorListener
 		brokenBlock = new AssetBrokenBlock(atlas);
 		movingBlock = new AssetMovingBlock(atlas);
 		ground = new AssetGround(atlas);
+		levelDecoration = new AssetLevelDecoration(atlas);
 	}
 	
 	/**

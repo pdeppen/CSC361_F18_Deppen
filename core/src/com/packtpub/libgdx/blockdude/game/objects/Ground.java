@@ -1,7 +1,6 @@
 package com.packtpub.libgdx.blockdude.game.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.packtpub.libgdx.blockdude.game.Assets;
 
