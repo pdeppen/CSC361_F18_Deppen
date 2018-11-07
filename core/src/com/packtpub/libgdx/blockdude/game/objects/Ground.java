@@ -26,7 +26,7 @@ public class Ground extends AbstractGameObject
 	  */
 	 private void init()
 	 {
-		 dimension.set(1, 1.5f);
+		 dimension.set(18, 1.5f);
 		 
 		 ground = Assets.instance.ground.ground;
 		 
