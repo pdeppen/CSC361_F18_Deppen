@@ -50,7 +50,7 @@ public class Sun extends AbstractGameObject
 		//float yRel = dimension.y * offsetY;
 		
 		// sun spans the whole level
-		dimension.set(25, 25);
+		dimension.set(7, 7);
 		int sunLength = 0;
 		sunLength += MathUtils.ceil(length / (2 * dimension.x));
 		//sunLength += MathUtils.ceil(0.5f + offsetX);

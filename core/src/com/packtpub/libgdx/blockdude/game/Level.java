@@ -147,7 +147,7 @@ public class Level
 		ufos.position.set(0, 2);
 		
 		sun = new Sun(pixmap.getWidth());
-		sun.position.set(0, 0);
+		sun.position.set(0, -3);
 		
 		// free memory
 		pixmap.dispose();
@@ -160,12 +160,15 @@ public class Level
 	 */
 	public void render (SpriteBatch batch) 
 	{
+		
+		// draw sun
+		sun.render(batch);
+		
 		// draw ground
 		for (Ground grnd : ground)
 			grnd.render(batch);
 		
-		// draw sun
-		sun.render(batch);
+
 		
 		// draw ufos
 		ufos.render(batch);
