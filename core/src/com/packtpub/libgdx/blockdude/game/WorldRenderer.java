@@ -8,6 +8,7 @@ import com.packtpub.libgdx.blockdude.util.Constants;
 
 /**
  * Created by Philip Deppen (Milestone 1, 10/29/18)
+ * Edited by Philip Deppen (Milestone 2, 11/6/18, issue 31)
  * renders game screen
  */
 public class WorldRenderer implements Disposable
@@ -41,28 +42,24 @@ public class WorldRenderer implements Disposable
     /**
      * Created by Philip Deppen (Milestone 1, 10/29/18)
      * Edited by Philip Deppen (Milestone 1, 10/30/18, issue 14)
+     * Edited by Philip Deppen (Milestone 2, 11/6/18, issue 31)
      * Defines in which order the game objects are drawn over others
      */
     public void render () 
     {
-    		renderTestObjects();
+    		renderWorld(batch);
     }
-    
-    /**
-     * Created by Philip Deppen (Milestone 1, 10/30/18, issue 14)
-     * renders test sprites created in WorldController to screen
-     */
-	private void renderTestObjects() 
+    	
+	/**
+	 * Created by Philip Deppen (Milestone 2, 11/6/18, issue 31)
+	 * @param batch
+	 */
+	private void renderWorld (SpriteBatch batch)
 	{
 		worldController.cameraHelper.applyTo(camera);
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		
-		for(Sprite sprite : worldController.testSprites) 
-		{
-			sprite.draw(batch);
-		}
-		
+		worldController.level.render(batch);
 		batch.end();
 	}
 	
@@ -87,4 +84,6 @@ public class WorldRenderer implements Disposable
     { 
     		batch.dispose();
     }
+    
+    
 }
