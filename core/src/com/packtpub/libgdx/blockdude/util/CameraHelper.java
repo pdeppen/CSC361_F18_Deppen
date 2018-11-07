@@ -4,9 +4,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.packtpub.libgdx.blockdude.game.objects.AbstractGameObject;
 
 /**
  * Created by Philip Deppen (Milestone 1, 10/30/18)
+ * Edited by Philip Deppen (Milestone 2, 11/6/18, issue 30)
  * manages and manipulates certain parameters of the camera used to render the game world
  */
 public class CameraHelper 
@@ -19,7 +21,7 @@ public class CameraHelper
 	private Vector2 position;
 	private float zoom;
 	
-	private Sprite target;
+	private AbstractGameObject target;
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
@@ -33,6 +35,7 @@ public class CameraHelper
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
+	 * Edited by Philip Deppen (Milestone 2, 11/6/18, issue 30)
 	 * @param deltatime
 	 */
 	public void update (float deltatime)
@@ -40,8 +43,8 @@ public class CameraHelper
 		if (!hasTarget())
 			return;
 		
-		position.x = target.getX() + target.getOriginX();
-		position.y = target.getY() + target.getOriginY();
+		position.x = target.position.x + target.origin.x;
+		position.y = target.position.y + target.origin.y;
 	}
 	
 	/**
@@ -86,16 +89,18 @@ public class CameraHelper
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
+	 * Edited by Philip Deppen (Milestone 2, 11/6/18, issue 30)
 	 */
-	public void setTarget(Sprite target)
+	public void setTarget(AbstractGameObject target)
 	{
 		this.target = target;
 	}
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
+	 * Edited by Philip Deppen (Milestone 2, 11/6/18, issue 30)
 	 */
-	public Sprite getTarget()
+	public AbstractGameObject getTarget()
 	{
 		return target;
 	}
@@ -110,10 +115,11 @@ public class CameraHelper
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
+	 * Edited by Philip Deppen (Milestone 2, 11/6/18, issue 30)
 	 * @param target
 	 * @return
 	 */
-	public boolean hasTarget(Sprite target)
+	public boolean hasTarget (AbstractGameObject target)
 	{
 		return hasTarget() && this.target.equals(target);
 	}
