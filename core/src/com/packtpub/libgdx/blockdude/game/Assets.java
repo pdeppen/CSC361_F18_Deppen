@@ -27,6 +27,7 @@ public class Assets implements Disposable, AssetErrorListener
 	public AssetStar star;
 	public AssetBrokenBlock brokenBlock;
 	public AssetMovingBlock movingBlock;
+	public AssetGround ground;
 	
 	// singleton: prevent instantiation from other classes
 	private Assets() {}
@@ -68,6 +69,7 @@ public class Assets implements Disposable, AssetErrorListener
 		star = new AssetStar(atlas);
 		brokenBlock = new AssetBrokenBlock(atlas);
 		movingBlock = new AssetMovingBlock(atlas);
+		ground = new AssetGround(atlas);
 	}
 	
 	/**
@@ -79,7 +81,6 @@ public class Assets implements Disposable, AssetErrorListener
 		public final AtlasRegion ufo01;
 		public final AtlasRegion ufo02;
 		public final AtlasRegion tree;
-		public final AtlasRegion ground;
 		public final AtlasRegion sun;
 		
 		public AssetLevelDecoration(TextureAtlas atlas)
@@ -87,7 +88,6 @@ public class Assets implements Disposable, AssetErrorListener
 			ufo01 = atlas.findRegion("ufo1");
 			ufo02 = atlas.findRegion("ufo2");
 			tree = atlas.findRegion("tree");
-			ground = atlas.findRegion("ground");
 			sun = atlas.findRegion("sun");
 		}
 	}
@@ -177,6 +177,19 @@ public class Assets implements Disposable, AssetErrorListener
 		}
 	}
 	
+	/**
+	 * Created by Philip Deppen (Milestone 2, 11/5/18, issue 22)
+	 * inner class
+	 */
+	public class AssetGround
+	{
+		public final AtlasRegion ground;
+		
+		public AssetGround (TextureAtlas atlas)
+		{
+			ground = atlas.findRegion("ground");
+		}
+	}
 
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
