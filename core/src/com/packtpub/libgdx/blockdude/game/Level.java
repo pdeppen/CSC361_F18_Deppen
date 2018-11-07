@@ -26,7 +26,8 @@ public class Level
 		EMPTY (0, 0, 0), // black
 		GROUND (0, 255, 0), // green
 		PLAYER_SPAWNPOINT (255, 255, 255), // white
-		ITEM_STAR (255, 0, 255); // purple
+		ITEM_STAR (255, 0, 255),
+		ITEM_BLOCK (255, 255, 0); // purple
 	
 		private int color;
 		
@@ -115,10 +116,15 @@ public class Level
 				{
 				
 				}
-				// gold coin
+				// item star
 				else if (BLOCK_TYPE.ITEM_STAR.sameColor(currentPixel)) 
 				{
 				
+				}
+				// item block
+				else if (BLOCK_TYPE.ITEM_BLOCK.sameColor(currentPixel))
+				{
+					
 				}
 				// unknown object/pixel color
 				else {
