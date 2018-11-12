@@ -31,6 +31,7 @@ public class Assets implements Disposable, AssetErrorListener
 	public AssetBrokenBlock brokenBlock;
 	public AssetMovingBlock movingBlock;
 	public AssetGround ground;
+	public AssetCoin coin;
 	public AssetLevelDecoration levelDecoration;
 	public AssetFonts fonts;	
 	
@@ -77,6 +78,7 @@ public class Assets implements Disposable, AssetErrorListener
 		brokenBlock = new AssetBrokenBlock(atlas);
 		movingBlock = new AssetMovingBlock(atlas);
 		ground = new AssetGround(atlas);
+		coin = new AssetCoin(atlas);
 		levelDecoration = new AssetLevelDecoration(atlas);
 	}
 	
@@ -201,6 +203,19 @@ public class Assets implements Disposable, AssetErrorListener
 		}
 	}
 
+	/**
+	 * Created by Philip Deppen (Milestone 2, 11/12/18, issue 39)
+	 * inner class
+	 */
+	public class AssetCoin
+	{
+		public final AtlasRegion coin;
+		
+		public AssetCoin (TextureAtlas atlas)
+		{
+			coin = atlas.findRegion("coin");
+		}
+	}
 	/**
 	 * Created by Philip Deppen (Milestone 2, 11/12/18, issue 40)
 	 * inner class for fonts

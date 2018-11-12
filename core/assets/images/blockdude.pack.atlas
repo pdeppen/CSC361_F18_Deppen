@@ -32,9 +32,16 @@ brokenblock
   orig: 70, 66
   offset: 0, 0
   index: -1
+coin
+  rotate: false
+  xy: 204, 29
+  size: 56, 57
+  orig: 56, 57
+  offset: 0, 0
+  index: -1
 door
   rotate: false
-  xy: 204, 17
+  xy: 276, 85
   size: 37, 69
   orig: 37, 69
   offset: 0, 0
