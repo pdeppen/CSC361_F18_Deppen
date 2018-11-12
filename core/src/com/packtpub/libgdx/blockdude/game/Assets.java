@@ -85,6 +85,7 @@ public class Assets implements Disposable, AssetErrorListener
 		public final AtlasRegion ufo02;
 		public final AtlasRegion tree;
 		public final AtlasRegion sun;
+		public final AtlasRegion background;
 		
 		public AssetLevelDecoration(TextureAtlas atlas)
 		{
@@ -92,6 +93,7 @@ public class Assets implements Disposable, AssetErrorListener
 			ufo02 = atlas.findRegion("ufo2");
 			tree = atlas.findRegion("tree");
 			sun = atlas.findRegion("sun");
+			background = atlas.findRegion("background");
 		}
 	}
 	

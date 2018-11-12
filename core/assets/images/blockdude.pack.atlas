@@ -1,82 +1,89 @@
 
 blockdude.pack.png
-size: 1024,256
+size: 1024,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+background
+  rotate: false
+  xy: 2, 258
+  size: 433, 226
+  orig: 433, 226
+  offset: 0, 0
+  index: -1
 block
   rotate: false
-  xy: 2, 2
+  xy: 204, 88
   size: 70, 66
   orig: 70, 66
   offset: 0, 0
   index: -1
 blockdude
   rotate: false
-  xy: 871, 158
+  xy: 376, 167
   size: 30, 89
   orig: 30, 89
   offset: 0, 0
   index: -1
 brokenblock
   rotate: false
-  xy: 760, 181
+  xy: 619, 326
   size: 70, 66
   orig: 70, 66
   offset: 0, 0
   index: -1
 door
   rotate: false
-  xy: 832, 178
+  xy: 204, 17
   size: 37, 69
   orig: 37, 69
   offset: 0, 0
   index: -1
 ground
   rotate: false
-  xy: 386, 172
+  xy: 2, 2
   size: 200, 75
   orig: 200, 75
   offset: 0, 0
   index: -1
 movingblock
   rotate: false
-  xy: 74, 2
+  xy: 791, 418
   size: 70, 66
   orig: 70, 66
   offset: 0, 0
   index: -1
 star
   rotate: false
-  xy: 146, 39
+  xy: 437, 277
   size: 30, 29
   orig: 30, 29
   offset: 0, 0
   index: -1
 sun
   rotate: false
-  xy: 204, 71
+  xy: 437, 308
   size: 180, 176
   orig: 180, 176
   offset: 0, 0
   index: -1
 tree
   rotate: false
-  xy: 2, 70
+  xy: 2, 79
   size: 200, 177
   orig: 200, 177
   offset: 0, 0
   index: -1
 ufo1
   rotate: false
-  xy: 588, 157
+  xy: 619, 394
   size: 170, 90
   orig: 170, 90
   offset: 0, 0
   index: -1
 ufo2
   rotate: false
-  xy: 386, 70
+  xy: 204, 156
   size: 170, 100
   orig: 170, 100
   offset: 0, 0

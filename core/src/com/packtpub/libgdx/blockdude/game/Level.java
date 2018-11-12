@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.packtpub.libgdx.blockdude.game.objects.AbstractGameObject;
+import com.packtpub.libgdx.blockdude.game.objects.Background;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
 import com.packtpub.libgdx.blockdude.game.objects.Sun;
 import com.packtpub.libgdx.blockdude.game.objects.Ufos;
@@ -55,6 +56,7 @@ public class Level
 	// decoration
 	public Ufos ufos;
 	public Sun sun;
+	public Background background;
 	
 	/**
 	 * Created by Philip Deppen (Milestone 2, 11/6/18, issue 26)
@@ -149,6 +151,9 @@ public class Level
 		sun = new Sun(pixmap.getWidth());
 		sun.position.set(0, -3);
 		
+		background = new Background(pixmap.getWidth());
+		background.position.set(-1, -1);
+		
 		// free memory
 		pixmap.dispose();
 		Gdx.app.debug(TAG, "level '" + filename + "' loaded");
@@ -162,7 +167,10 @@ public class Level
 	{
 		
 		// draw sun
-		sun.render(batch);
+		//sun.render(batch);
+		
+		// draw background
+		background.render(batch);
 		
 		// draw ground
 		for (Ground grnd : ground)

@@ -67,20 +67,22 @@ public class BlockDudeMain implements ApplicationListener {
 		}
 		
 		// Sets the clear screen color 
-		//Gdx.gl.glClearColor(0xff/255.0f, 0xff/255.0f, 0x66/255.0f, 0xff/255.0f);
+		//#5DADE2
+		//#85C1E9
+		Gdx.gl.glClearColor(0x85/255.0f, 0xC1/255.0f, 0xE9/255.0f, 0xff/255.0f);
 		
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		batch = new SpriteBatch();
-		img = new Texture("images/background.png");
-		
-		batch.begin();
-		batch.draw(img, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());	
-		batch.end();
+//		Gdx.gl.glClearColor(1, 1, 1, 1);
+//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//		
+//		batch = new SpriteBatch();
+//		img = new Texture("images/background.png");
+//		
+//		batch.begin();
+//		batch.draw(img, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());	
+//		batch.end();
 		
 		// Clears the screen
-		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		// Render game world to screen
 		worldRenderer.render();
 		
@@ -113,8 +115,8 @@ public class BlockDudeMain implements ApplicationListener {
 	{
 		worldRenderer.dispose();
 		Assets.instance.dispose();
-		img.dispose();
-		batch.dispose();
+		//img.dispose();
+		//batch.dispose();
 	}
 
 }
