@@ -43,6 +43,7 @@ public class Background extends AbstractGameObject
 	
 	/**
 	 * Created by Philip Deppen (Milestone 2, 11/7/18, issue 37)
+	 * Edited by Philip Deppen (Milestone 2, 11/12/18, issue 38)
 	 * @param batch
 	 */
 	private void drawBackground (SpriteBatch batch, float offsetX, float offsetY)
@@ -62,7 +63,7 @@ public class Background extends AbstractGameObject
 			// draw background
 			reg = regBackground1;
 			batch.draw(reg.getTexture(), origin.x + xRel, position.y +
-					   origin.y + yRel, origin.x, origin.y, dimension.x + 5, dimension.y + 5,
+					   origin.y + yRel, origin.x, origin.y, dimension.x + 5, dimension.y + 10,
 					   scale.x, scale.y, rotation, reg.getRegionX(), reg.getRegionY(),
 					   reg.getRegionWidth(), reg.getRegionHeight(), false, false);
 
@@ -70,7 +71,7 @@ public class Background extends AbstractGameObject
 
 			reg = regBackground2;
 			batch.draw(reg.getTexture(), origin.x + xRel, position.y +
-					   origin.y + yRel, origin.x, origin.y, dimension.x + 5, dimension.y + 5,
+					   origin.y + yRel, origin.x, origin.y, dimension.x + 5, dimension.y + 10,
 					   scale.x, scale.y, rotation, reg.getRegionX(), reg.getRegionY(),
 					   reg.getRegionWidth(), reg.getRegionHeight(), false, false);			
 			

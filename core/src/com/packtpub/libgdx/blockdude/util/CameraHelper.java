@@ -1,5 +1,6 @@
 package com.packtpub.libgdx.blockdude.util;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
@@ -30,7 +31,8 @@ public class CameraHelper
 	public CameraHelper()
 	{
 		position = new Vector2();
-		zoom = 1.0f;
+		//zoom = 1.0f;
+		zoom = 2.270987f;
 	}
 	
 	/**
@@ -124,11 +126,18 @@ public class CameraHelper
 		return hasTarget() && this.target.equals(target);
 	}
 	
+	/**
+	 * Created by Philip Deppen (Milestone 1, 10/30/18)
+	 * Edited by Philip Deppen (Milestone 2, 11/12/18, issue 38)
+	 * @param camera
+	 */
 	public void applyTo (OrthographicCamera camera)
 	{
-		camera.position.x = position.x;
-		camera.position.y = position.y;
+		camera.position.x = position.x + 6.6024f;
+		camera.position.y = position.y + 2.7722f;
 		camera.zoom = zoom;
+		//Gdx.app.debug(TAG, "Position x: " + position.x);
+		//Gdx.app.debug(TAG, "Position y: " + position.y);
 		camera.update();
 	}
 	
