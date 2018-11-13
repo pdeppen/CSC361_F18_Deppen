@@ -32,7 +32,8 @@ public class CameraHelper
 	{
 		position = new Vector2();
 		//zoom = 1.0f;
-		zoom = 2.270987f;
+		//zoom = 2.270987f;
+		zoom = 1.8225404f;
 	}
 	
 	/**
@@ -79,6 +80,7 @@ public class CameraHelper
 	public void setZoom(float zoom)
 	{
 		this.zoom = MathUtils.clamp(zoom, MAX_ZOOM_IN, MAX_ZOOM_OUT);
+		//Gdx.app.debug(TAG, "zoom: " + this.zoom);
 	}
 	
 	/**
@@ -133,8 +135,12 @@ public class CameraHelper
 	 */
 	public void applyTo (OrthographicCamera camera)
 	{
-		camera.position.x = position.x + 6.6024f;
-		camera.position.y = position.y + 2.7722f;
+		//camera.position.x = position.x + 6.6024f;
+		//camera.position.y = position.y + 2.7722f;
+		camera.position.x = position.x + 4.0919675f;
+		camera.position.y = position.y + 2.1841137f;
+
+		
 		camera.zoom = zoom;
 		//Gdx.app.debug(TAG, "Position x: " + position.x);
 		//Gdx.app.debug(TAG, "Position y: " + position.y);
