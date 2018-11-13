@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.packtpub.libgdx.blockdude.game.objects.AbstractGameObject;
 import com.packtpub.libgdx.blockdude.game.objects.Background;
+import com.packtpub.libgdx.blockdude.game.objects.Dude;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
 import com.packtpub.libgdx.blockdude.game.objects.Sun;
 import com.packtpub.libgdx.blockdude.game.objects.Ufos;
@@ -15,6 +16,7 @@ import com.packtpub.libgdx.blockdude.game.objects.Ground;
 
 /**
  * Created by Philip Deppen (Milestone 2, 11/6/18, issue 26)
+ * Edited by Philip Deppen (Milestone 3, 11/12/18, issue 41)
  */
 public class Level 
 {
@@ -52,6 +54,7 @@ public class Level
 	
 	// objects 
 	public Array<Ground> ground;
+	public Dude dude;
 	
 	// decoration
 	public Ufos ufos;
@@ -75,6 +78,8 @@ public class Level
 	{
 		// objects
 		ground = new Array<Ground>();
+		// player character
+		dude = null;
 		
 		// load image file that represents the level data
 		Pixmap pixmap = new Pixmap (Gdx.files.internal(filename));
@@ -117,10 +122,12 @@ public class Level
 					}
 				}
 				// player spawn point
-				else if
-				(BLOCK_TYPE.PLAYER_SPAWNPOINT.sameColor(currentPixel)) 
+				else if (BLOCK_TYPE.PLAYER_SPAWNPOINT.sameColor(currentPixel)) 
 				{
-				
+					obj = new Dude();
+					offsetHeight = -8.0f;
+					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
+					dude = (Dude) obj;
 				}
 				// item star
 				else if (BLOCK_TYPE.ITEM_STAR.sameColor(currentPixel)) 
@@ -146,7 +153,7 @@ public class Level
 		
 		// decorations
 		ufos = new Ufos(pixmap.getWidth());
-		ufos.position.set(0, 2);
+		ufos.position.set(0, 4);
 		
 		sun = new Sun(pixmap.getWidth());
 		sun.position.set(0, -3);
@@ -176,7 +183,8 @@ public class Level
 		for (Ground grnd : ground)
 			grnd.render(batch);
 		
-
+		// draw character
+		dude.render(batch);
 		
 		// draw ufos
 		ufos.render(batch);
