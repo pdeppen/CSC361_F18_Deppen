@@ -63,7 +63,7 @@ public class Background extends AbstractGameObject
 			// draw background
 			reg = regBackground1;
 			batch.draw(reg.getTexture(), origin.x + xRel, position.y +
-					   origin.y + yRel, origin.x, origin.y, dimension.x + 5, dimension.y + 10,
+					   origin.y + yRel - 1.5f, origin.x, origin.y, dimension.x + 5, dimension.y + 10,
 					   scale.x, scale.y, rotation, reg.getRegionX(), reg.getRegionY(),
 					   reg.getRegionWidth(), reg.getRegionHeight(), false, false);
 
@@ -71,7 +71,7 @@ public class Background extends AbstractGameObject
 
 			reg = regBackground2;
 			batch.draw(reg.getTexture(), origin.x + xRel, position.y +
-					   origin.y + yRel, origin.x, origin.y, dimension.x + 5, dimension.y + 10,
+					   origin.y + yRel - 1.5f, origin.x, origin.y, dimension.x + 5, dimension.y + 10,
 					   scale.x, scale.y, rotation, reg.getRegionX(), reg.getRegionY(),
 					   reg.getRegionWidth(), reg.getRegionHeight(), false, false);			
 			
