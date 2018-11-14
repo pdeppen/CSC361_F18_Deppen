@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.packtpub.libgdx.blockdude.game.objects.AbstractGameObject;
 import com.packtpub.libgdx.blockdude.game.objects.Background;
+import com.packtpub.libgdx.blockdude.game.objects.Coins;
 import com.packtpub.libgdx.blockdude.game.objects.Dude;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
 import com.packtpub.libgdx.blockdude.game.objects.Sun;
@@ -33,7 +34,7 @@ public class Level
 		GROUND (0, 255, 0), // green
 		PLAYER_SPAWNPOINT (255, 255, 255), // white
 		ITEM_STAR (255, 0, 255),
-		ITEM_BLOCK (255, 255, 0); // purple
+		ITEM_COIN (255, 255, 0); // purple
 	
 		private int color;
 		
@@ -56,6 +57,7 @@ public class Level
 	// objects 
 	public Array<Ground> ground;
 	public Dude dude;
+	public Array<Coins> coins;
 	
 	// decoration
 	public Ufos ufos;
@@ -79,6 +81,8 @@ public class Level
 	{
 		// objects
 		ground = new Array<Ground>();
+		coins = new Array<Coins>();
+		
 		// player character
 		dude = null;
 		
@@ -136,9 +140,12 @@ public class Level
 				
 				}
 				// item block
-				else if (BLOCK_TYPE.ITEM_BLOCK.sameColor(currentPixel))
+				else if (BLOCK_TYPE.ITEM_COIN.sameColor(currentPixel))
 				{
-					
+					obj = new Coins();
+			        offsetHeight = -1.5f;
+			        obj.position.set(pixelX,baseHeight * obj.dimension.y + offsetHeight);
+			        coins.add((Coins) obj);
 				}
 				// unknown object/pixel color
 				else {
@@ -180,6 +187,10 @@ public class Level
 		// draw background
 		background.render(batch);
 		
+		// draw coins
+		for (Coins coin : coins)
+			coin.render(batch);
+		
 		// draw ground
 		for (Ground grnd : ground)
 			grnd.render(batch);
@@ -201,5 +212,8 @@ public class Level
 		
 		for (Ground grnd : ground)
 			grnd.update(deltaTime);
+		
+		for (Coins coin : coins)
+			coin.update(deltaTime);
 	}
 }

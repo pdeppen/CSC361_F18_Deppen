@@ -9,7 +9,6 @@ import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
 /**
  * Created by Philip Deppen (Milestone 1, 10/30/18)
  */
-
 public class DesktopLauncher 
 {
 	private static boolean rebuildAtlas = false;
