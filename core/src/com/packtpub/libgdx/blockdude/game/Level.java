@@ -17,6 +17,7 @@ import com.packtpub.libgdx.blockdude.game.objects.Ground;
 /**
  * Created by Philip Deppen (Milestone 2, 11/6/18, issue 26)
  * Edited by Philip Deppen (Milestone 3, 11/12/18, issue 41)
+ * Edited by Philip Deppen (Milestone 3, 11/13/18, issue 43)
  */
 public class Level 
 {
@@ -189,5 +190,16 @@ public class Level
 		// draw ufos
 		ufos.render(batch);
 		
+	}
+	
+	/**
+	 * Created by Philip Deppen (Milestone 3, 11/13/18, issue 43)
+	 */
+	public void update (float deltaTime)
+	{
+		dude.update(deltaTime);
+		
+		for (Ground grnd : ground)
+			grnd.update(deltaTime);
 	}
 }

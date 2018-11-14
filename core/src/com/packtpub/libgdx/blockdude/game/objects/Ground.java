@@ -6,6 +6,7 @@ import com.packtpub.libgdx.blockdude.game.Assets;
 
 /**
  * Created by Philip Deppen (Milestone 2, 11/5/18, issue 22)
+ * Edited by Philip Deppen (Milestone 3, 11/13/18, issue 43)
  */
 public class Ground extends AbstractGameObject
 {
@@ -36,11 +37,14 @@ public class Ground extends AbstractGameObject
 	 
 	 /**
 	  * Created by Philip Deppen (Milestone 2, 11/5/18, issue 22)
+	  * Edited by Philip Deppen (Milestone 3, 11/13/18, issue 43)
 	  * @param length
 	  */
 	 public void setLength(int length)
 	 {
 		 this.length = length;
+		 // update bounding box for collision detection
+		 bounds.set(0, 0, dimension.x * length, dimension.y);
 	 }
 	 
 	 /**

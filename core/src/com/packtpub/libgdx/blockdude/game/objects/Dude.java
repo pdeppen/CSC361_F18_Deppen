@@ -8,6 +8,7 @@ import com.packtpub.libgdx.blockdude.util.Constants;
 
 /**
  * Created by Philip Deppen (Milestone 3, 11/12/18, issue 41)
+ * Edited by Philip Deppen (Milestone 3, 11/13/18, issue 43)
  */
 public class Dude extends AbstractGameObject
 {
@@ -71,12 +72,37 @@ public class Dude extends AbstractGameObject
 	}
 	
 	/**
-	 * Created by Philip Deppen (Milestone 3, 11/12/18, issue 41)
+	 * Created by Philip Deppen (Milestone 3, 11/12/18, issue 43)
 	 * @param jumpKeyPressed
 	 */
 	public void setJumping (boolean jumpKeyPressed)
 	{
-		
+		switch (jumpState)
+		{
+			case GROUNDED: // character is standing on a platform
+				if (jumpKeyPressed)
+				{
+					// start counting jump time from its beginning
+					timeJumping = 0;
+					jumpState = JUMP_STATE.JUMP_RISING;		
+				}
+				break;
+			case JUMP_RISING: // rising in the air
+				if (!jumpKeyPressed)
+				{
+					jumpState = JUMP_STATE.JUMP_FALLING;
+				}
+				break;
+			case FALLING: // falling down
+			case JUMP_FALLING: // falling down after jump
+				if (jumpKeyPressed && hasStarPowerup)
+				{
+					timeJumping = JUMP_TIME_OFFSET_FLYING;
+					jumpState = JUMP_STATE.JUMP_RISING;
+				}
+				break;
+				
+		}
 	}
 	
 	/**
@@ -95,7 +121,68 @@ public class Dude extends AbstractGameObject
 	{
 		return hasStarPowerup;
 	}
+		
+	/**
+	 * Created by Philip Deppen (Milestone 3, 11/13/18, issue 43)
+	 * @param deltaTime
+	 */
+	@Override
+	public void update (float deltaTime)
+	{
+		super.update(deltaTime);
+		if (velocity.x != 0)
+		{
+			viewDirection = velocity.x < 0 ? VIEW_DIRECTION.LEFT :
+				VIEW_DIRECTION.RIGHT;
+		}
+		if (timeLeftStarPowerup > 0)
+		{
+			timeLeftStarPowerup -= deltaTime;
+			if (timeLeftStarPowerup < 0)
+			{
+				// disable power-up
+				timeLeftStarPowerup = 0;
+				setStarPowerup(false);
+			}
+		}
+	}
 	
+	/**
+	 * Created by Philip Deppen (Milestone 3, 11/13/18, issue 43)
+	 */
+	@Override
+	protected void updateMotionY (float deltaTime)
+	{
+		switch (jumpState) 
+		{
+		case GROUNDED:
+			jumpState = JUMP_STATE.FALLING;
+			break;
+		case JUMP_RISING:
+			// Keep track of jump time
+			timeJumping += deltaTime;
+			// Jump time left?
+			if (timeJumping <= JUMP_TIME_MAX)
+			{
+				// Still jumping
+				velocity.y = terminalVelocity.y;
+			}
+			break;
+		case FALLING:
+			break;
+		case JUMP_FALLING:
+			// Add delta times to track jump time
+			timeJumping += deltaTime;
+			// Jump to minimal height if jump key was pressed to short
+			if (timeJumping > 0 && timeJumping <= JUMP_TIME_MIN)
+			{
+				// Still Jumping
+				velocity.y = terminalVelocity.y;
+			}
+		}
+		if (jumpState != JUMP_STATE.GROUNDED)
+			super.updateMotionY(deltaTime);
+	}
 	
 	/**
 	 * Created by Philip Deppen (Milestone 3, 11/12/18, issue 41)
