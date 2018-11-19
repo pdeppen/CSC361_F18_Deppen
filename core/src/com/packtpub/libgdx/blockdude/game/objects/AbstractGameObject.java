@@ -60,7 +60,9 @@ public abstract class AbstractGameObject
 			updateMotionY(deltaTime);
 			// Move to new position
 			position.x += velocity.x * deltaTime;
+			//System.out.println("position x: " + position.x);
 			position.y += velocity.y * deltaTime;
+			//System.out.println("position y: " + position.y);
 		}
 		else
 		{

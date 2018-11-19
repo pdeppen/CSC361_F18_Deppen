@@ -78,7 +78,6 @@ public class CollisionHandler implements ContactListener
      */
     private void processGroundContact(Fixture dudeFixture, Fixture groundFixture)
     {
-    		System.out.println("here");
     	    Dude dude = (Dude) dudeFixture.getBody().getUserData();
         Ground ground = (Ground) groundFixture.getBody().getUserData();
         // static ?

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.packtpub.libgdx.blockdude.game.Assets;
+import com.packtpub.libgdx.blockdude.game.Level;
 import com.packtpub.libgdx.blockdude.util.Constants;
 
 /**
@@ -68,7 +69,7 @@ public class Dude extends AbstractGameObject
 		timeJumping = 0;
 		// power-ups
 		hasStarPowerup = false;
-		timeLeftStarPowerup = 0;				
+		timeLeftStarPowerup = 0;		
 	}
 	
 	/**
