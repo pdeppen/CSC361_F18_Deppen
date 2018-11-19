@@ -2,12 +2,14 @@ package com.packtpub.libgdx.blockdude.game.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.MathUtils;
 
 /**
  * Created by Philip Deppen (Milestone 2, 11/5/18, issue 21)
  * Edited by Philip Deppen (Milestone 3, 11/12/18, issue 41)
+ * Edited by Philip Deppen (Milestone 3, 11/18/18, issue 47)
  * base class for game objects
  */
 public abstract class AbstractGameObject 
@@ -24,6 +26,8 @@ public abstract class AbstractGameObject
     
     public Vector2 acceleration;
     public Rectangle bounds;
+    
+    public Body body;
     
     /**
      * Created by Philip Deppen (Milestone 2, 11/5/18, issue 21)
@@ -50,11 +54,19 @@ public abstract class AbstractGameObject
      */
     public void update (float deltaTime)
     {
-		updateMotionX(deltaTime);
-		updateMotionY(deltaTime);
-		// Move to new position
-		position.x += velocity.x * deltaTime;
-		position.y += velocity.y * deltaTime;
+		if (body == null)
+		{	
+			updateMotionX(deltaTime);
+			updateMotionY(deltaTime);
+			// Move to new position
+			position.x += velocity.x * deltaTime;
+			position.y += velocity.y * deltaTime;
+		}
+		else
+		{
+			position.set(body.getPosition());
+			rotation = body.getAngle() * MathUtils.radiansToDegrees;
+		}
     }
     
     /**

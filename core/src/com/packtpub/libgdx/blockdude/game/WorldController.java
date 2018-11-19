@@ -8,6 +8,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.Array;
 import com.packtpub.libgdx.blockdude.util.CameraHelper;
 import com.packtpub.libgdx.blockdude.game.Assets;
@@ -25,6 +32,7 @@ import com.packtpub.libgdx.blockdude.game.objects.Dude.JUMP_STATE;
  * Created by Philip Deppen (Milestone 1, 10/29/18)
  * Edited by Philip Deppen (Milestone 2, 11/6/18, issue 29)
  * Edited by Philip Deppen (Milestone 3, 11/13/18, issue 43)
+ * Edited by Philip Deppen (Milestone 3, 11/18/18, issue 47)
  * contains game logic
  */
 public class WorldController extends InputAdapter
@@ -41,6 +49,8 @@ public class WorldController extends InputAdapter
 	private Rectangle r1 = new Rectangle();
 	private Rectangle r2 = new Rectangle();
 	
+	public World b2world;
+	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/29/18)
 	 * constructor
@@ -51,33 +61,33 @@ public class WorldController extends InputAdapter
 	}
 	
 	private void onCollisionDudeWithRock(Ground ground) {
-		Dude dude = level.dude;
-		float heightDifference = Math.abs(dude.position.y - (  ground.position.y + ground.bounds.height));
-		
-		if (heightDifference > 0.25f) {
-			boolean hitRightEdge = dude.position.x > (ground.position.x + ground.bounds.width / 2.0f);
-			if (hitRightEdge) {
-				dude.position.x = ground.position.x + ground.bounds.width;
-			}
-			else {
-				dude.position.x = ground.position.x - dude.bounds.width;
-			}
-			return;
-		}
-		
-		switch (dude.jumpState) {
-			case GROUNDED:
-				break;
-			case FALLING:
-			case JUMP_FALLING:
-				dude.position.y = ground.position.y + dude.bounds.height + dude.origin.y;
-				//Gdx.app.debug(TAG, "position " + dude.position.y);
-				dude.jumpState = JUMP_STATE.GROUNDED;
-				break;
-			case JUMP_RISING:
-				dude.position.y = ground.position.y + dude.bounds.height + dude.origin.y;
-				break;
-		}
+//		Dude dude = level.dude;
+//		float heightDifference = Math.abs(dude.position.y - (  ground.position.y + ground.bounds.height));
+//		
+//		if (heightDifference > 0.25f) {
+//			boolean hitRightEdge = dude.position.x > (ground.position.x + ground.bounds.width / 2.0f);
+//			if (hitRightEdge) {
+//				dude.position.x = ground.position.x + ground.bounds.width;
+//			}
+//			else {
+//				dude.position.x = ground.position.x - dude.bounds.width;
+//			}
+//			return;
+//		}
+//		
+//		switch (dude.jumpState) {
+//			case GROUNDED:
+//				break;
+//			case FALLING:
+//			case JUMP_FALLING:
+//				dude.position.y = ground.position.y + dude.bounds.height + dude.origin.y;
+//				//Gdx.app.debug(TAG, "position " + dude.position.y);
+//				dude.jumpState = JUMP_STATE.GROUNDED;
+//				break;
+//			case JUMP_RISING:
+//				dude.position.y = ground.position.y + dude.bounds.height + dude.origin.y;
+//				break;
+//		}
 	} 
 	
 	/**
@@ -117,6 +127,7 @@ public class WorldController extends InputAdapter
 	{
 		score = 0;
 		level = new Level (Constants.LEVEL_01);
+		initPhysics();
 	}
 	
 	/**
@@ -196,5 +207,42 @@ public class WorldController extends InputAdapter
 		}
 
 		return false;
+	}
+	
+	/**
+	 * Created by Philip Deppen (Milestone 3, 11/18/18, issue 47)
+	 * Adds Box2D physics for game objects. 
+	 */
+	public void initPhysics()
+	{
+		if (b2world != null)
+			b2world.dispose();
+		
+	    b2world = new World(new Vector2(0, -9.81f), true);
+	    
+        b2world.setContactListener(new CollisionHandler(this));
+        
+        Vector2 origin = new Vector2();
+        
+		for (Ground grnd : level.ground)
+		{
+			BodyDef bodyDef = new BodyDef();
+			bodyDef.type = BodyType.KinematicBody;
+			bodyDef.position.set(grnd.position);
+			Body body = b2world.createBody(bodyDef);
+			// set user data
+			body.setUserData(grnd);
+			grnd.body = body;
+			PolygonShape polygonShape = new PolygonShape();
+			origin.x = grnd.bounds.width / 2.0f;
+			origin.y = grnd.bounds.height / 2.0f;
+			polygonShape.setAsBox(grnd.bounds.width / 2.0f, grnd.bounds.height / 2.0f,origin, 0);
+			FixtureDef fixtureDef = new FixtureDef();
+			fixtureDef.friction = 0.5f;
+			fixtureDef.shape = polygonShape;
+			body.createFixture(fixtureDef);
+			polygonShape.dispose();
+		}
+        
 	}
 }

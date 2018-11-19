@@ -56,7 +56,7 @@ public class Level
 	
 	// objects 
 	public Array<Ground> ground;
-	public Dude dude;
+	public static Dude dude;
 	public Array<Coins> coins;
 	
 	// decoration
