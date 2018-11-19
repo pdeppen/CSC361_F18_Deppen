@@ -117,18 +117,18 @@ public class CollisionHandler implements ContactListener
 	@Override
 	public void beginContact(Contact contact) {
 		// TODO Auto-generated method stub		
+
 	}
 
 	@Override
 	public void endContact(Contact contact) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

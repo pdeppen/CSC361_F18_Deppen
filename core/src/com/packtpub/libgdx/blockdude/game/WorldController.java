@@ -243,6 +243,24 @@ public class WorldController extends InputAdapter
 			body.createFixture(fixtureDef);
 			polygonShape.dispose();
 		}
-        
+		
+		// static ?
+		Dude dude = Level.dude;
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DynamicBody;
+		bodyDef.position.set(dude.position);
+		Body body = b2world.createBody(bodyDef);
+		body.setUserData(dude);
+		dude.body = body;
+		PolygonShape polygonShape = new PolygonShape();
+		origin.x = dude.bounds.width / 2.0f;
+		origin.y = dude.bounds.height / 2.0f;
+		polygonShape.setAsBox(dude.bounds.width / 2.0f,
+		dude.bounds.height / 2.0f,origin, 0);
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = polygonShape;
+		body.createFixture(fixtureDef);
+		polygonShape.dispose();
+        		
 	}
 }
