@@ -3,6 +3,7 @@ package com.packtpub.libgdx.blockdude.game.objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.packtpub.libgdx.blockdude.game.Assets;
 import com.packtpub.libgdx.blockdude.game.Level;
 import com.packtpub.libgdx.blockdude.util.Constants;
@@ -80,29 +81,26 @@ public class Dude extends AbstractGameObject
 	{
 		switch (jumpState)
 		{
-			case GROUNDED: // character is standing on a platform
+			case GROUNDED: 
 				if (jumpKeyPressed)
 				{
-					// start counting jump time from its beginning
 					timeJumping = 0;
-					jumpState = JUMP_STATE.JUMP_RISING;		
+					jumpState = JUMP_STATE.JUMP_RISING;
+					body.setLinearVelocity(new Vector2(0, 7));
 				}
 				break;
-			case JUMP_RISING: // rising in the air
+			case JUMP_RISING: 
 				if (!jumpKeyPressed)
-				{
 					jumpState = JUMP_STATE.JUMP_FALLING;
-				}
 				break;
-			case FALLING: // falling down
-			case JUMP_FALLING: // falling down after jump
-				if (jumpKeyPressed && hasStarPowerup)
-				{
-					timeJumping = JUMP_TIME_OFFSET_FLYING;
+			case FALLING:
+			case JUMP_FALLING:
+				if (jumpKeyPressed && this.hasStarPowerup)
+				{	
+					//timeJumping = JUMP_TIME_OFFEST_FLYING;
 					jumpState = JUMP_STATE.JUMP_RISING;
 				}
-				break;
-				
+			break;
 		}
 	}
 	

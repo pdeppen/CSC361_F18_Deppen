@@ -59,10 +59,14 @@ public class CollisionHandler implements ContactListener
     		AbstractGameObject objA = (AbstractGameObject)fixtureA.getBody().getUserData();
     		AbstractGameObject objB = (AbstractGameObject)fixtureB.getBody().getUserData();
     		
-    		if ((objA instanceof Dude) && (objB instanceof Ground))
+    		if ((objA instanceof Dude) && (objB instanceof Ground)) //|| ((objA instanceof Ground) && (objB instanceof Dude)))
         {
             processGroundContact(fixtureA,fixtureB);
         }
+    		if ((objA instanceof Ground) && (objB instanceof Dude))
+    		{
+    			processGroundContact(fixtureB, fixtureA);
+    		}
         
         //if ((objA instanceof Boy) && (objB instanceof Ghost))
         //{
@@ -89,10 +93,12 @@ public class CollisionHandler implements ContactListener
              boolean hitRightEdge = dude.position.x > (ground.position.x + ground.bounds.width / 2.0f);
              if (hitRightEdge) 
              {
+            	 	System.out.println("here1");
             	 	dude.position.x = ground.position.x + ground.bounds.width;
              }
              else 
              {
+         	 	System.out.println("here2");
             	 	dude.position.x = ground.position.x - dude.bounds.width;
              }
              return;
