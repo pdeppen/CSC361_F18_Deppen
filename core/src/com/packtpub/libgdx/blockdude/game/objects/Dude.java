@@ -148,36 +148,37 @@ public class Dude extends AbstractGameObject
 	
 	/**
 	 * Created by Philip Deppen (Milestone 3, 11/13/18, issue 43)
+	 * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 50) - method is no longer called in AbstractGameObject
 	 */
 	@Override
 	protected void updateMotionY (float deltaTime)
 	{
 		switch (jumpState) 
 		{
-		case GROUNDED:
-			jumpState = JUMP_STATE.FALLING;
-			break;
-		case JUMP_RISING:
-			// Keep track of jump time
-			timeJumping += deltaTime;
-			// Jump time left?
-			if (timeJumping <= JUMP_TIME_MAX)
-			{
-				// Still jumping
-				velocity.y = terminalVelocity.y;
-			}
-			break;
-		case FALLING:
-			break;
-		case JUMP_FALLING:
-			// Add delta times to track jump time
-			timeJumping += deltaTime;
-			// Jump to minimal height if jump key was pressed to short
-			if (timeJumping > 0 && timeJumping <= JUMP_TIME_MIN)
-			{
-				// Still Jumping
-				velocity.y = terminalVelocity.y;
-			}
+			case GROUNDED:
+				jumpState = JUMP_STATE.FALLING;
+				break;
+			case JUMP_RISING:
+				// Keep track of jump time
+				timeJumping += deltaTime;
+				// Jump time left?
+				if (timeJumping <= JUMP_TIME_MAX)
+				{
+					// Still jumping
+					velocity.y = terminalVelocity.y;
+				}
+				break;
+			case FALLING:
+				break;
+			case JUMP_FALLING:
+				// Add delta times to track jump time
+				timeJumping += deltaTime;
+				// Jump to minimal height if jump key was pressed to short
+				if (timeJumping > 0 && timeJumping <= JUMP_TIME_MIN)
+				{
+					// Still Jumping
+					velocity.y = terminalVelocity.y;
+				}
 		}
 		if (jumpState != JUMP_STATE.GROUNDED)
 			super.updateMotionY(deltaTime);

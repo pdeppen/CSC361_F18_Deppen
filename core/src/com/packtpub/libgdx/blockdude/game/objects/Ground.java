@@ -45,6 +45,7 @@ public class Ground extends AbstractGameObject
 		 this.length = length;
 		 // update bounding box for collision detection
 		 bounds.set(0, 0, dimension.x * length, dimension.y);
+		 //System.out.println("Ground);
 	 }
 	 
 	 /**
@@ -58,6 +59,7 @@ public class Ground extends AbstractGameObject
      
 	/**
 	 * Created by Philip Deppen (Milestone 2, 11/5/18, issue 22)
+	 * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 50) - fixed initial Dude position
 	 */
 	@Override
 	public void render(SpriteBatch batch) 
@@ -68,7 +70,7 @@ public class Ground extends AbstractGameObject
 		float relY = 0;
 		
 		reg = ground;
-		relX -= dimension.x / 4;
+		//relX -= dimension.x / 4;
 		
 		// draw ground object
 		batch.draw(reg.getTexture(), position.x + relX, position.y + relY, origin.x, origin.y, dimension.x /4 , dimension.y, 

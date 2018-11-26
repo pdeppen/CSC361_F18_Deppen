@@ -50,18 +50,19 @@ public abstract class AbstractGameObject
     /**
      * Created by Philip Deppen (Milestone 2, 11/5/18, issue 21)
      * Edited by Philip Deppen (Milestone 3, 11/13/18, issue 43)
+     * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 50)
      * @param deltaTime
      */
     public void update (float deltaTime)
     {
 		if (body == null)
 		{	
-			updateMotionX(deltaTime);
-			updateMotionY(deltaTime);
+			//updateMotionX(deltaTime);
+			//updateMotionY(deltaTime);
 			// Move to new position
-			position.x += velocity.x * deltaTime;
+			//position.x += velocity.x * deltaTime;
 			//System.out.println("position x: " + position.x);
-			position.y += velocity.y * deltaTime;
+			//position.y += velocity.y * deltaTime;
 			//System.out.println("position y: " + position.y);
 		}
 		else
@@ -69,6 +70,8 @@ public abstract class AbstractGameObject
 			position.set(body.getPosition());
 			rotation = body.getAngle() * MathUtils.radiansToDegrees;
 		}
+    		//position.set(body.getPosition());
+    		//rotation = body.getAngle() * MathUtils.radiansToDegrees;
     }
     
     /**

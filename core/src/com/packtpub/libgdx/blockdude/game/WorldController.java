@@ -60,54 +60,7 @@ public class WorldController extends InputAdapter
 	{
 		init();
 	}
-	
-	private void onCollisionDudeWithRock(Ground ground) {
-//		Dude dude = level.dude;
-//		float heightDifference = Math.abs(dude.position.y - (  ground.position.y + ground.bounds.height));
-//		
-//		if (heightDifference > 0.25f) {
-//			boolean hitRightEdge = dude.position.x > (ground.position.x + ground.bounds.width / 2.0f);
-//			if (hitRightEdge) {
-//				dude.position.x = ground.position.x + ground.bounds.width;
-//			}
-//			else {
-//				dude.position.x = ground.position.x - dude.bounds.width;
-//			}
-//			return;
-//		}
-//		
-//		switch (dude.jumpState) {
-//			case GROUNDED:
-//				break;
-//			case FALLING:
-//			case JUMP_FALLING:
-//				dude.position.y = ground.position.y + dude.bounds.height + dude.origin.y;
-//				//Gdx.app.debug(TAG, "position " + dude.position.y);
-//				dude.jumpState = JUMP_STATE.GROUNDED;
-//				break;
-//			case JUMP_RISING:
-//				dude.position.y = ground.position.y + dude.bounds.height + dude.origin.y;
-//				break;
-//		}
-	} 
-	
-	/**
-	 * Created by Philip Deppen (Milestone 3, 11/13/18, issue 43)
-	 */
-	private void testCollisions() {
-		r1.set(level.dude.position.x, level.dude.position.y,
-			   level.dude.bounds.width, level.dude.bounds.height);
 		
-		// Test collision: Bunny Head <-> Rocks
-	     for (Ground grnd : level.ground) {
-	       r2.set(grnd.position.x, grnd.position.y, grnd.bounds.width,grnd.bounds.height);
-	       if (!r1.overlaps(r2)) continue;
-       			onCollisionDudeWithRock(grnd);
-	       // IMPORTANT: must do all collisions for valid
-	       // edge testing on rocks.
-	     }
-	}
-	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/29/18)
 	 * Edited by Philip Deppen (Milestone 2, 11/6/18, issue 29)

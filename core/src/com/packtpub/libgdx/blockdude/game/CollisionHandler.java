@@ -59,14 +59,14 @@ public class CollisionHandler implements ContactListener
     		AbstractGameObject objA = (AbstractGameObject)fixtureA.getBody().getUserData();
     		AbstractGameObject objB = (AbstractGameObject)fixtureB.getBody().getUserData();
     		
-    		if ((objA instanceof Dude) && (objB instanceof Ground)) //|| ((objA instanceof Ground) && (objB instanceof Dude)))
+    		if (((objA instanceof Dude) && (objB instanceof Ground)) || ((objA instanceof Ground) && (objB instanceof Dude)))
         {
             processGroundContact(fixtureA,fixtureB);
         }
-    		if ((objA instanceof Ground) && (objB instanceof Dude))
-    		{
-    			processGroundContact(fixtureB, fixtureA);
-    		}
+//    		if ((objA instanceof Ground) && (objB instanceof Dude))
+//    		{
+//    			processGroundContact(fixtureB, fixtureA);
+//    		}
         
         //if ((objA instanceof Boy) && (objB instanceof Ghost))
         //{
@@ -82,8 +82,9 @@ public class CollisionHandler implements ContactListener
      */
     private void processGroundContact(Fixture dudeFixture, Fixture groundFixture)
     {
-    	    Dude dude = (Dude) dudeFixture.getBody().getUserData();
-        Ground ground = (Ground) groundFixture.getBody().getUserData();
+    		//System.out.println("Ground contact");
+    	    Dude dude = (Dude) groundFixture.getBody().getUserData();
+        Ground ground = (Ground) dudeFixture.getBody().getUserData();
         // static ?
         dude = Level.dude;
         float heightDifference = Math.abs(dude.position.y - (  ground.position.y + ground.bounds.height));
@@ -93,12 +94,10 @@ public class CollisionHandler implements ContactListener
              boolean hitRightEdge = dude.position.x > (ground.position.x + ground.bounds.width / 2.0f);
              if (hitRightEdge) 
              {
-            	 	System.out.println("here1");
             	 	dude.position.x = ground.position.x + ground.bounds.width;
              }
              else 
              {
-         	 	System.out.println("here2");
             	 	dude.position.x = ground.position.x - dude.bounds.width;
              }
              return;
@@ -119,16 +118,60 @@ public class CollisionHandler implements ContactListener
          }
     }
     
+    /**
+     * Created by Philip Deppen (Milestone 3, 11/26/18, issue 50)
+     * @param contact
+     */
 	@Override
 	public void beginContact(Contact contact) {
-		// TODO Auto-generated method stub		
+		Fixture fixtureA = contact.getFixtureA();
+		Fixture fixtureB = contact.getFixtureB();
+		processContact(contact);
 
+		Gdx.app.log("CollisionHandler-begin A", "begin");
+
+		ContactListener listener = getListener(fixtureA.getFilterData().categoryBits, fixtureB.getFilterData().categoryBits);
+		if (listener != null)
+		{
+		    listener.beginContact(contact);
+	    }	
 	}
 
+	/**
+	 * Created by Philip Deppen (Milestone 3, 11/26/18, issue 50)
+	 * @param contact
+	 */
 	@Override
 	public void endContact(Contact contact) {
 		// TODO Auto-generated method stub
+		Fixture fixtureA = contact.getFixtureA();
+		Fixture fixtureB = contact.getFixtureB();
 
+		Gdx.app.log("CollisionHandler-end A", "end");
+
+		 Gdx.app.log("CollisionHandler-end A", fixtureA.getBody().getLinearVelocity().x+" : "+fixtureA.getBody().getLinearVelocity().y);
+		 Gdx.app.log("CollisionHandler-end B", fixtureB.getBody().getLinearVelocity().x+" : "+fixtureB.getBody().getLinearVelocity().y);
+		ContactListener listener = getListener(fixtureA.getFilterData().categoryBits, fixtureB.getFilterData().categoryBits);
+	    if (listener != null)
+		{
+		    listener.endContact(contact);
+		}
+	}
+	
+	/**
+	 * Created by Philip Deppen (Milestone 3, 11/26/18)
+	 * @param categoryA
+	 * @param categoryB
+	 * @return
+	 */
+	private ContactListener getListener(short categoryA, short categoryB)
+	{
+		ObjectMap<Short, ContactListener> listenerCollection = listeners.get(categoryA);
+		if (listenerCollection == null)
+		{
+		    return null;
+		}
+		return listenerCollection.get(categoryB);
 	}
 
 	@Override
