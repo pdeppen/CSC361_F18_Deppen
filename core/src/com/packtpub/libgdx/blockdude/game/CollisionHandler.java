@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.packtpub.libgdx.blockdude.game.objects.AbstractGameObject;
+import com.packtpub.libgdx.blockdude.game.objects.Coins;
 import com.packtpub.libgdx.blockdude.game.objects.Dude;
 import com.packtpub.libgdx.blockdude.game.objects.Dude.JUMP_STATE;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
@@ -50,6 +51,7 @@ public class CollisionHandler implements ContactListener
     
     /**
      * Created by Philip Deppen (Milestone 3, 11/18/18, issue 47)
+     * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 51)
      * @param contact
      */
     private void processContact(Contact contact)
@@ -67,12 +69,24 @@ public class CollisionHandler implements ContactListener
 //    		{
 //    			processGroundContact(fixtureB, fixtureA);
 //    		}
-        
-        //if ((objA instanceof Boy) && (objB instanceof Ghost))
-        //{
-        //    processGhostContact(fixtureA,fixtureB);
-        //}
+        if (((objA instanceof Dude) && (objB instanceof Coins)) || ((objA instanceof Coins) && (objB instanceof Dude)))
+        {
+        		processCoinContact(fixtureA, fixtureB);
+        }
      
+    }
+    
+    /**
+     * Created by Philip Deppen (Milestone 3, 11/26/18, issue 51)
+     */
+    private void processCoinContact(Fixture dudeFixture, Fixture coinFixture)
+    {
+    		Dude dude = (Dude) coinFixture.getBody().getUserData();
+    		Coins coins = (Coins) dudeFixture.getBody().getUserData();
+    		
+    		coins.collected = true;
+    		worldController.score += coins.getScore();
+    		Gdx.app.log("CollisionHandler", "coin collected");
     }
     
     /**

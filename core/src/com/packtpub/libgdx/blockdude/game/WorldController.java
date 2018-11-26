@@ -24,6 +24,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
 import com.packtpub.libgdx.blockdude.util.Constants;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
+import com.packtpub.libgdx.blockdude.game.objects.Coins;
 import com.packtpub.libgdx.blockdude.game.objects.Dude;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
 import com.packtpub.libgdx.blockdude.game.objects.Dude.JUMP_STATE;
@@ -180,6 +181,7 @@ public class WorldController extends InputAdapter
 	
 	/**
 	 * Created by Philip Deppen (Milestone 3, 11/18/18, issue 47)
+	 * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 51)
 	 * Adds Box2D physics for game objects. 
 	 */
 	public void initPhysics()
@@ -213,7 +215,28 @@ public class WorldController extends InputAdapter
 			polygonShape.dispose();
 		}
 		
-		// static ?
+		/* coin body */
+		for (Coins coin : level.coins) 
+		{
+	    		BodyDef bodyDef = new BodyDef();
+	    		bodyDef.type = BodyType.KinematicBody;
+	    		bodyDef.position.set(coin.position);
+	    		Body body = b2world.createBody(bodyDef);
+	    		body.setUserData(coin);
+	    		
+	    		coin.body = body;
+	    		PolygonShape polygonShape = new PolygonShape();
+	    		origin.x = coin.bounds.width / 2.0f;
+	    		origin.y = coin.bounds.height / 2.0f;
+	    		polygonShape.setAsBox(coin.bounds.width / 2.0f, coin.bounds.height / 2.0f,origin, 0);
+	    		FixtureDef fixtureDef = new FixtureDef();
+	    		fixtureDef.shape = polygonShape;
+	    		fixtureDef.isSensor = true;
+	    		body.createFixture(fixtureDef);
+	    		polygonShape.dispose();		
+    		}
+		
+		/* dude body */
 		Dude dude = Level.dude;
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
