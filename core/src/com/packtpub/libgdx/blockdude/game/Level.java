@@ -10,6 +10,7 @@ import com.packtpub.libgdx.blockdude.game.objects.Background;
 import com.packtpub.libgdx.blockdude.game.objects.Coins;
 import com.packtpub.libgdx.blockdude.game.objects.Dude;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
+import com.packtpub.libgdx.blockdude.game.objects.Star;
 import com.packtpub.libgdx.blockdude.game.objects.Sun;
 import com.packtpub.libgdx.blockdude.game.objects.Ufos;
 import com.packtpub.libgdx.blockdude.game.Level.BLOCK_TYPE;
@@ -19,6 +20,7 @@ import com.packtpub.libgdx.blockdude.game.objects.Ground;
  * Created by Philip Deppen (Milestone 2, 11/6/18, issue 26)
  * Edited by Philip Deppen (Milestone 3, 11/12/18, issue 41)
  * Edited by Philip Deppen (Milestone 3, 11/13/18, issue 43)
+ * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 49)
  */
 public class Level 
 {
@@ -58,6 +60,7 @@ public class Level
 	public Array<Ground> ground;
 	public static Dude dude;
 	public Array<Coins> coins;
+	public Array<Star> stars;
 	
 	// decoration
 	public Ufos ufos;
@@ -75,6 +78,7 @@ public class Level
 	
 	/**
 	 * Created by Philip Deppen (Milestone 2, 11/6/18, issue 26)
+	 * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 49)
 	 * @param filename
 	 */
 	private void init (String filename) 
@@ -82,6 +86,7 @@ public class Level
 		// objects
 		ground = new Array<Ground>();
 		coins = new Array<Coins>();
+		stars = new Array<Star>();
 		
 		// player character
 		dude = null;
@@ -137,7 +142,10 @@ public class Level
 				// item star
 				else if (BLOCK_TYPE.ITEM_STAR.sameColor(currentPixel)) 
 				{
-				
+					obj = new Star();
+					offsetHeight = -1.5f;
+					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
+					stars.add((Star) obj);
 				}
 				// item block
 				else if (BLOCK_TYPE.ITEM_COIN.sameColor(currentPixel))
@@ -176,6 +184,7 @@ public class Level
 	
 	/**
 	 * Created by Philip Deppen (Milestone 2, 11/6/18, issue 26)
+	 * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 49)
 	 * @param batch
 	 */
 	public void render (SpriteBatch batch) 
@@ -191,6 +200,10 @@ public class Level
 		for (Coins coin : coins)
 			coin.render(batch);
 		
+		// draw stars
+		for (Star star : stars)
+			star.render(batch);
+		
 		// draw ground
 		for (Ground grnd : ground)
 			grnd.render(batch);
@@ -205,6 +218,7 @@ public class Level
 	
 	/**
 	 * Created by Philip Deppen (Milestone 3, 11/13/18, issue 43)
+	 * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 49)
 	 */
 	public void update (float deltaTime)
 	{
@@ -215,5 +229,8 @@ public class Level
 		
 		for (Coins coin : coins)
 			coin.update(deltaTime);
+		
+		for (Star star : stars)
+			star.update(deltaTime);
 	}
 }
