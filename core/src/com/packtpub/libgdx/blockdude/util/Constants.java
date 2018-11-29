@@ -3,6 +3,7 @@ package com.packtpub.libgdx.blockdude.util;
 /**
  * Created by Philip Deppen (Milestone 1, 10/29/18)
  * Edited by Philip Deppen (Milestone 2, 11/6/18, issue 27)
+ * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 49)
  * holds values that are fixed throughout project
  */
 public class Constants 
@@ -27,4 +28,7 @@ public class Constants
 	
 	// Amount of extra lives at level start
 	public static final int LIVES_START = 3;
+	
+	// star powerup time (seconds)
+	public static final float ITEM_STAR_POWERUP_DURATION = 9;
 }

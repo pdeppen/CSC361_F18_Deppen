@@ -107,11 +107,16 @@ public class Dude extends AbstractGameObject
 	
 	/**
 	 * Created by Philip Deppen (Milestone 3, 11/12/18, issue 41)
+	 * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 49)
 	 * @param pickedUp
 	 */
 	public void setStarPowerup (boolean pickedUp)
 	{
-		
+		hasStarPowerup = pickedUp;
+		if (pickedUp)
+		{
+			timeLeftStarPowerup = Constants.ITEM_STAR_POWERUP_DURATION;
+		}
 	}
 	
 	/**
@@ -119,7 +124,7 @@ public class Dude extends AbstractGameObject
 	 */
 	public boolean hasStarPowerup()
 	{
-		return hasStarPowerup;
+		return hasStarPowerup && timeLeftStarPowerup > 0;
 	}
 		
 	/**
@@ -187,11 +192,17 @@ public class Dude extends AbstractGameObject
 	
 	/**
 	 * Created by Philip Deppen (Milestone 3, 11/12/18, issue 41)
+	 * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 49)
 	 */
 	@Override
 	public void render(SpriteBatch batch) 
 	{
 		TextureRegion reg = null;
+		
+		if (hasStarPowerup)
+		{
+			batch.setColor(1.0f, 0.8f, 0.0f, 1.0f);
+		}
 		
 		// draw image
 		reg = regDude;

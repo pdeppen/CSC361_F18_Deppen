@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 import com.packtpub.libgdx.blockdude.util.Constants;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 
 /**
  * Created by Philip Deppen (Milestone 1, 10/29/18)
@@ -20,6 +21,9 @@ public class WorldRenderer implements Disposable
     private SpriteBatch batch;
     private WorldController worldController;
     private OrthographicCamera cameraGUI;
+    
+    private static final boolean DEBUG_DRAW_BOX2D_WORLD = true;
+    private Box2DDebugRenderer b2debugRenderer;
     
     /**
      * Created by Philip Deppen (Milestone 1, 10/29/18)
@@ -47,6 +51,8 @@ public class WorldRenderer implements Disposable
     		cameraGUI.position.set(0, 0, 0);
     		cameraGUI.setToOrtho(true); // flip y-axis
     		cameraGUI.update();
+    		
+    		b2debugRenderer = new Box2DDebugRenderer();
     }
     
     /**
@@ -72,6 +78,10 @@ public class WorldRenderer implements Disposable
 		batch.begin();
 		worldController.level.render(batch);
 		batch.end();
+		
+		if (DEBUG_DRAW_BOX2D_WORLD) {
+			b2debugRenderer.render(worldController.b2world, camera.combined);
+		}
 	}
 	
     /**

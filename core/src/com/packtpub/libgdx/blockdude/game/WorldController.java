@@ -22,6 +22,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Input.Keys;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
+import com.packtpub.libgdx.blockdude.game.objects.Star;
 import com.packtpub.libgdx.blockdude.util.Constants;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
 import com.packtpub.libgdx.blockdude.game.objects.Coins;
@@ -182,6 +183,7 @@ public class WorldController extends InputAdapter
 	/**
 	 * Created by Philip Deppen (Milestone 3, 11/18/18, issue 47)
 	 * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 51)
+	 * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 49)
 	 * Adds Box2D physics for game objects. 
 	 */
 	public void initPhysics()
@@ -195,6 +197,7 @@ public class WorldController extends InputAdapter
         
         Vector2 origin = new Vector2();
         
+        /* ground body */
 		for (Ground grnd : level.ground)
 		{
 			BodyDef bodyDef = new BodyDef();
@@ -235,6 +238,29 @@ public class WorldController extends InputAdapter
 	    		body.createFixture(fixtureDef);
 	    		polygonShape.dispose();		
     		}
+		
+		/* star body */
+		for (Star star : level.stars)
+		{
+	    		BodyDef bodyDef = new BodyDef();
+	    		bodyDef.type = BodyType.KinematicBody;
+	    		bodyDef.position.set(star.position);
+	    		Body body = b2world.createBody(bodyDef);
+	    		// set user data
+	    		body.setUserData(star);
+	    		
+	    		star.body = body;
+	    		PolygonShape polygonShape = new PolygonShape();
+	    		origin.x = star.bounds.width / 2.0f;
+	    		origin.y = star.bounds.height / 2.0f;
+	    		polygonShape.setAsBox(star.bounds.width / 2.0f,
+	    		star.bounds.height / 2.0f,origin, 0);
+	    		FixtureDef fixtureDef = new FixtureDef();
+	    		fixtureDef.shape = polygonShape;
+	    		fixtureDef.isSensor = true;
+	    		body.createFixture(fixtureDef);
+	    		polygonShape.dispose();
+		}
 		
 		/* dude body */
 		Dude dude = Level.dude;

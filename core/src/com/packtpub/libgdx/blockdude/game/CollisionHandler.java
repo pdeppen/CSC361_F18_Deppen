@@ -10,6 +10,7 @@ import com.packtpub.libgdx.blockdude.game.objects.Coins;
 import com.packtpub.libgdx.blockdude.game.objects.Dude;
 import com.packtpub.libgdx.blockdude.game.objects.Dude.JUMP_STATE;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
+import com.packtpub.libgdx.blockdude.game.objects.Star;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
@@ -52,6 +53,7 @@ public class CollisionHandler implements ContactListener
     /**
      * Created by Philip Deppen (Milestone 3, 11/18/18, issue 47)
      * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 51)
+     * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 49)
      * @param contact
      */
     private void processContact(Contact contact)
@@ -74,6 +76,23 @@ public class CollisionHandler implements ContactListener
         		processCoinContact(fixtureA, fixtureB);
         }
      
+        if (((objA instanceof Dude) && (objB instanceof Star)) || ((objA instanceof Star) && (objB instanceof Dude)))
+        {
+        		processStarContact (fixtureA, fixtureB);
+        }
+    }
+    
+    /**
+     * Created by Philip Deppen (Milestone 3, 11/26/18, issue 49)
+     */
+    private void processStarContact(Fixture dudeFixture, Fixture starFixture)
+    {
+    		Dude dude = (Dude) starFixture.getBody().getUserData();
+    		Star star = (Star) dudeFixture.getBody().getUserData();
+    		
+    		star.collected = true;
+    		worldController.level.dude.setStarPowerup(true);
+    		Gdx.app.log(this.getClass().getName(), "star collected");
     }
     
     /**
