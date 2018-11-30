@@ -21,6 +21,7 @@ public abstract class AbstractGameScreen
 	public abstract void render (float deltaTime);
 	public abstract void resize (int width, int height);
 	public abstract void show();
+	public abstract void hide();
 	public abstract void pause();
 	
 	public void resume ()
