@@ -46,7 +46,6 @@ public class Ground extends AbstractGameObject
 		 
 		 // update bounding box for collision detection
 		 bounds.set(0,0,4.5f,1.5f);//bounds.set(0, 0, dimension.x * length, dimension.y);
-		 System.out.println("Ground: "+length);
 	 }
 	 
 	 /**
