@@ -27,7 +27,7 @@ public class Ground extends AbstractGameObject
 	  */
 	 private void init()
 	 {
-		 dimension.set(18, 1.5f);
+		 dimension.set(4.5f, 1.5f);
 		 
 		 ground = Assets.instance.ground.ground;
 		 
@@ -43,9 +43,10 @@ public class Ground extends AbstractGameObject
 	 public void setLength(int length)
 	 {
 		 this.length = length;
+		 
 		 // update bounding box for collision detection
-		 bounds.set(0, 0, dimension.x * length, dimension.y);
-		 //System.out.println("Ground);
+		 bounds.set(0,0,4.5f,1.5f);//bounds.set(0, 0, dimension.x * length, dimension.y);
+		 System.out.println("Ground: "+length);
 	 }
 	 
 	 /**
@@ -54,7 +55,7 @@ public class Ground extends AbstractGameObject
 	  */
 	 public void increaseLength (int amount)
 	 {
-		 setLength(length + amount);
+		 //setLength(length + amount);
 	 }
      
 	/**
@@ -73,7 +74,7 @@ public class Ground extends AbstractGameObject
 		//relX -= dimension.x / 4;
 		
 		// draw ground object
-		batch.draw(reg.getTexture(), position.x + relX, position.y + relY, origin.x, origin.y, dimension.x /4 , dimension.y, 
+		batch.draw(reg.getTexture(), position.x + relX, position.y + relY, origin.x, origin.y, dimension.x , dimension.y, 
 				   scale.x, scale.y, rotation, reg.getRegionX(), reg.getRegionY(), reg.getRegionWidth(), reg.getRegionHeight(), false, false);
 		
 		
