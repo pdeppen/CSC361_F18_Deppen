@@ -31,4 +31,14 @@ public class Constants
 	
 	// star powerup time (seconds)
 	public static final float ITEM_STAR_POWERUP_DURATION = 9;
+	
+	//main menu
+	public static final String TEXTURE_ATLAS_UI = "images-ui/blockdude-ui.pack.atlas"; 
+	public static final String TEXTURE_ATLAS_LIBGDX_UI = "images-ui/uiskin.atlas"; 
+	
+	// Location of description file for skins
+	public static final String SKIN_LIBGDX_UI = "images-ui/uiskin.json"; 
+	public static final String SKIN_CANYONBUNNY_UI ="images-ui/blockdude-ui.json"; 
+
+	public static final String PREFERENCES = "Blockdude.prefs";
 }
