@@ -20,9 +20,11 @@ import com.packtpub.libgdx.blockdude.util.CameraHelper;
 import com.packtpub.libgdx.blockdude.game.Assets;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input.Keys;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
 import com.packtpub.libgdx.blockdude.game.objects.Star;
+import com.packtpub.libgdx.blockdude.screens.MenuScreen;
 import com.packtpub.libgdx.blockdude.util.Constants;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
 import com.packtpub.libgdx.blockdude.game.objects.Coins;
@@ -36,6 +38,7 @@ import com.packtpub.libgdx.blockdude.game.objects.Dude.JUMP_STATE;
  * Edited by Philip Deppen (Milestone 3, 11/13/18, issue 43)
  * Edited by Philip Deppen (Milestone 3, 11/18/18, issue 47)
  * Edited by Philip Deppen (Milestone 3, 11/19/18, issue 46)
+ * Edited by Philip Deppen (Milestone 4, 11/30/18)
  * contains game logic
  */
 public class WorldController extends InputAdapter
@@ -54,12 +57,16 @@ public class WorldController extends InputAdapter
 	
 	public World b2world;
 	
+	private Game game;
+	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/29/18)
+	 * Edited by Philip Deppen (Milestone 4, 11/30/18)
 	 * constructor
 	 */
 	public WorldController() 
 	{
+		this.game = game;
 		init();
 	}
 		
@@ -97,6 +104,7 @@ public class WorldController extends InputAdapter
 	public void update (float deltaTime)
 	{
 		handleDebugInput(deltaTime);
+		/* need to add code from page 234 */
 		handleInputGame(deltaTime);
 		level.update(deltaTime);
 		b2world.step(deltaTime, 8, 3);
@@ -175,6 +183,11 @@ public class WorldController extends InputAdapter
 		else if (keycode == Keys.ENTER) {
 			cameraHelper.setTarget(cameraHelper.hasTarget() ? null: level.dude);
 		    Gdx.app.debug(TAG, "Camera follow enabled: " + cameraHelper.hasTarget());
+		}
+		// back to menu
+		else if (keycode == Keys.ESCAPE || keycode == Keys.BACK)
+		{
+			backToMenu();
 		}
 		
 		return false;
@@ -321,4 +334,14 @@ public class WorldController extends InputAdapter
 	       }
 	   }
    	}
+	
+	/**
+	 * Created by Philip Deppen (Milestone 4, 11/30/18)
+	 */
+	private void backToMenu()
+	{
+		// switch to menu screen
+		game.setScreen(new MenuScreen(game));
+	}
+	
 }
