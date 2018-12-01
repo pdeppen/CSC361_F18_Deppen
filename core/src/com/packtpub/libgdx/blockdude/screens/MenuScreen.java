@@ -1,7 +1,6 @@
 package com.packtpub.libgdx.blockdude.screens;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Color;
@@ -26,7 +25,6 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.packtpub.libgdx.blockdude.game.Assets;
 import com.packtpub.libgdx.blockdude.util.Constants;
 import com.packtpub.libgdx.blockdude.screens.GameScreen;
-
 
 /**
  * Created by Philip Deppen (Milestone 4, 11/30/18, issue 55)
@@ -92,12 +90,13 @@ public class MenuScreen extends AbstractGameScreen
 	 */
     private void rebuildStage() 
     {
-    		skinBlockDude = new Skin (Gdx.files.internal(Constants.SKIN_CANYONBUNNY_UI), new TextureAtlas(Constants.TEXTURE_ATLAS_UI));
+    		skinBlockDude = new Skin (Gdx.files.internal(Constants.SKIN_BLOCKDUDE_UI), new TextureAtlas(Constants.TEXTURE_ATLAS_UI));
     		
     		skinLibgdx = new Skin (Gdx.files.internal(Constants.SKIN_LIBGDX_UI), new TextureAtlas(Constants.TEXTURE_ATLAS_LIBGDX_UI));
     		
     		//build all layers
     		Table layerBackground = buildBackgroundLayer();
+
     		Table layerObjects = buildObjectsLayer();
     		Table layerLogos = buildLogosLayer();
     		Table layerControls = buildControlsLayer();
@@ -123,10 +122,10 @@ public class MenuScreen extends AbstractGameScreen
     private Table buildBackgroundLayer() 
     {
     		Table layer = new Table();
+	    	//layer.left().top();
     		// + Background
     		imgBackground = new Image(skinBlockDude, "background");
     		layer.add(imgBackground);
-    		layer.row().expand();
     		return layer;
     }
     

@@ -38,7 +38,7 @@ public class Constants
 	
 	// Location of description file for skins
 	public static final String SKIN_LIBGDX_UI = "images-ui/uiskin.json"; 
-	public static final String SKIN_CANYONBUNNY_UI ="images-ui/blockdude-ui.json"; 
+	public static final String SKIN_BLOCKDUDE_UI ="images-ui/blockdude-ui.json"; 
 
 	public static final String PREFERENCES = "Blockdude.prefs";
 }
