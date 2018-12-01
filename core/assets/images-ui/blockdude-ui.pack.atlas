@@ -1,0 +1,41 @@
+
+blockdude-ui.pack.png
+size: 1024,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background
+  rotate: false
+  xy: 2, 73
+  size: 433, 226
+  orig: 433, 226
+  offset: 0, 0
+  index: -1
+blockdude
+  rotate: false
+  xy: 437, 2
+  size: 100, 297
+  orig: 100, 297
+  offset: 0, 0
+  index: -1
+logo
+  rotate: false
+  xy: 2, 301
+  size: 706, 130
+  orig: 706, 130
+  offset: 0, 0
+  index: -1
+options
+  rotate: false
+  xy: 539, 149
+  size: 150, 150
+  orig: 150, 150
+  offset: 0, 0
+  index: -1
+play
+  rotate: false
+  xy: 710, 352
+  size: 150, 79
+  orig: 150, 79
+  offset: 0, 0
+  index: -1

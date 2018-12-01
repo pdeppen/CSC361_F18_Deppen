@@ -1,0 +1,11 @@
+{
+com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+play: { down: play, up: play },
+options: { down: options, up: options }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Image: {
+background: { drawable: background },
+logo: { drawable: logo },
+blockdude: { drawable: blockdude },
+},
+}
