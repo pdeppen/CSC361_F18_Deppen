@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 import com.packtpub.libgdx.blockdude.util.Constants;
+import com.packtpub.libgdx.blockdude.util.GamePreferences;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 
@@ -13,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
  * Created by Philip Deppen (Milestone 1, 10/29/18)
  * Edited by Philip Deppen (Milestone 2, 11/6/18, issue 31)
  * Edited by Philip Deppen (Milestone 2, 11/12/18, issue 39)
+ * Edited by Philip Deppen (Milestone 4, 12/1/18, issue 63)
  * renders game screen
  */
 public class WorldRenderer implements Disposable
@@ -173,7 +175,8 @@ public class WorldRenderer implements Disposable
     		renderGuiExtraLives(batch);
     		
     		// draw fps
-    		renderGuiFpsCounter(batch);
+    		if (GamePreferences.instance.showFpsCounter)
+    			renderGuiFpsCounter(batch);
     		
     		batch.end();
     }

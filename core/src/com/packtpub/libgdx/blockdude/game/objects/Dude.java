@@ -7,10 +7,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.packtpub.libgdx.blockdude.game.Assets;
 import com.packtpub.libgdx.blockdude.game.Level;
 import com.packtpub.libgdx.blockdude.util.Constants;
+import com.packtpub.libgdx.blockdude.util.CharacterSkin;
+import com.packtpub.libgdx.blockdude.util.GamePreferences;
 
 /**
  * Created by Philip Deppen (Milestone 3, 11/12/18, issue 41)
  * Edited by Philip Deppen (Milestone 3, 11/13/18, issue 43)
+ * Edited by Philip Deppen (Milestone 4, 12/1/18, issue 63)
  */
 public class Dude extends AbstractGameObject
 {
@@ -193,11 +196,15 @@ public class Dude extends AbstractGameObject
 	/**
 	 * Created by Philip Deppen (Milestone 3, 11/12/18, issue 41)
 	 * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 49)
+	 * Edited by Philip Deppen (Milestone 4, 12/1/18, issue 63)
 	 */
 	@Override
 	public void render(SpriteBatch batch) 
 	{
 		TextureRegion reg = null;
+		
+		// apply skin color
+		batch.setColor(CharacterSkin.values() [GamePreferences.instance.charSkin].getColor());
 		
 		if (hasStarPowerup)
 		{

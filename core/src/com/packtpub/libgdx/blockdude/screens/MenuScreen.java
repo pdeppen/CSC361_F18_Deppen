@@ -23,7 +23,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.packtpub.libgdx.blockdude.game.Assets;
+import com.packtpub.libgdx.blockdude.util.CharacterSkin;
 import com.packtpub.libgdx.blockdude.util.Constants;
+import com.packtpub.libgdx.blockdude.util.GamePreferences;
 import com.packtpub.libgdx.blockdude.screens.GameScreen;
 
 /**
@@ -53,7 +55,7 @@ public class MenuScreen extends AbstractGameScreen
     private Slider sldSound;
     private CheckBox chkMusic;
     private Slider sldMusic;
-    //private SelectBox<CharacterSkin> selCharSkin;
+    private SelectBox<CharacterSkin> selCharSkin;
     private Image imgCharSkin;
     private CheckBox chkShowFpsCounter;
 	
@@ -254,15 +256,15 @@ public class MenuScreen extends AbstractGameScreen
      */
     private void loadSettings() 
     {
-//    		GamePreferences prefs = GamePreferences.instance;
-//        prefs.load();
-//        chkSound.setChecked(prefs.sound);
-//        sldSound.setValue(prefs.volSound);
-//        chkMusic.setChecked(prefs.music);
-//        sldMusic.setValue(prefs.volMusic);
-//        selCharSkin.setSelectedIndex(prefs.charSkin);
-//        onCharSkinSelected(prefs.charSkin);
-//        chkShowFpsCounter.setChecked(prefs.showFpsCounter);
+    		GamePreferences prefs = GamePreferences.instance;
+        prefs.load();
+        chkSound.setChecked(prefs.sound);
+        sldSound.setValue(prefs.volSound);
+        chkMusic.setChecked(prefs.music);
+        sldMusic.setValue(prefs.volMusic);
+        selCharSkin.setSelectedIndex(prefs.charSkin);
+        onCharSkinSelected(prefs.charSkin);
+        chkShowFpsCounter.setChecked(prefs.showFpsCounter);
     }
     
     /**
@@ -270,15 +272,15 @@ public class MenuScreen extends AbstractGameScreen
      */
     private void saveSettings() 
     {
-//    		GamePreferences prefs = GamePreferences.instance;
-//    		
-//    		prefs.sound = chkSound.isChecked();
-//    		prefs.volSound = sldSound.getValue();
-//    		prefs.music = chkMusic.isChecked();
-//    		prefs.volMusic = sldMusic.getValue();
-//    		prefs.charSkin = selCharSkin.getSelectedIndex();
-//    		prefs.showFpsCounter = chkShowFpsCounter.isChecked();
-//    		prefs.save();
+    		GamePreferences prefs = GamePreferences.instance;
+    		
+    		prefs.sound = chkSound.isChecked();
+    		prefs.volSound = sldSound.getValue();
+    		prefs.music = chkMusic.isChecked();
+    		prefs.volMusic = sldMusic.getValue();
+    		prefs.charSkin = selCharSkin.getSelectedIndex();
+    		prefs.showFpsCounter = chkShowFpsCounter.isChecked();
+    		prefs.save();
     }
     
     /**
@@ -286,8 +288,8 @@ public class MenuScreen extends AbstractGameScreen
      */
     private void onCharSkinSelected(int index) 
     {
-//    		CharacterSkin skin = CharacterSkin.values() [index];
-//    		imgCharSkin.setColor(skin.getColor());
+    		CharacterSkin skin = CharacterSkin.values() [index];
+    		imgCharSkin.setColor(skin.getColor());
     }
     
     /**
@@ -348,27 +350,26 @@ public class MenuScreen extends AbstractGameScreen
     {
 		Table tbl = new Table();
 		
-//		// + Title: "Character Skin"
-//		tbl.pad(10, 10, 0, 10);
-//		tbl.add(new Label("Character Skin", skinLibgdx,
-//		"default-font", Color.ORANGE)).colspan(2);
-//		tbl.row();
-//		
-//		// + Drop down box filled with skin items
-//		selCharSkin = new SelectBox<CharacterSkin>(skinLibgdx);
-//		selCharSkin.setItems(CharacterSkin.values());
-//		selCharSkin.addListener(new ChangeListener() {
-//			@Override
-//			public void changed(ChangeEvent event, Actor actor) 
-//			{
-//				onCharSkinSelected(((SelectBox<CharacterSkin>)actor).getSelectedIndex());
-//			}
-//	     });
-//		tbl.add(selCharSkin).width(120).padRight(20);
-//		
-//		// + Skin preview image
-//		imgCharSkin = new Image(Assets.instance.bunny.head);
-//		tbl.add(imgCharSkin).width(50).height(50);
+		// + Title: "Character Skin"
+		tbl.pad(10, 10, 0, 10);
+		tbl.add(new Label("Character Skin", skinLibgdx, "default-font", Color.ORANGE)).colspan(2);
+		tbl.row();
+		
+		// + Drop down box filled with skin items
+		selCharSkin = new SelectBox<CharacterSkin>(skinLibgdx);
+		selCharSkin.setItems(CharacterSkin.values());
+		selCharSkin.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) 
+			{
+				onCharSkinSelected(((SelectBox<CharacterSkin>)actor).getSelectedIndex());
+			}
+	     });
+		tbl.add(selCharSkin).width(120).padRight(20);
+		
+		// + Skin preview image
+		imgCharSkin = new Image(Assets.instance.dude.dude);
+		tbl.add(imgCharSkin).width(50).height(50);
 		return tbl;
     	}
     
