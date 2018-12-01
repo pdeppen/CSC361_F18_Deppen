@@ -9,7 +9,7 @@ import com.packtpub.libgdx.blockdude.game.Assets;
  * Created by Philip Deppen (Milestone 4, 11/30/18, issue 53)
  */
 
-public abstract class AbstractGameScreen 
+public abstract class AbstractGameScreen implements Screen
 {
 	protected Game game;
 	
