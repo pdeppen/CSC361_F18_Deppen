@@ -64,7 +64,7 @@ public class WorldController extends InputAdapter
 	 * Edited by Philip Deppen (Milestone 4, 11/30/18)
 	 * constructor
 	 */
-	public WorldController() 
+	public WorldController(Game game) 
 	{
 		this.game = game;
 		init();
