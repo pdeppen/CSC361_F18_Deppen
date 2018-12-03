@@ -90,7 +90,7 @@ public class Dude extends AbstractGameObject
 					timeJumping = 0;
 					jumpState = JUMP_STATE.JUMP_RISING;
 					/* edit second argument to change jump height */
-					body.setLinearVelocity(new Vector2(0, 5));
+					body.setLinearVelocity(new Vector2(0, 6));
 				}
 				break;
 			case JUMP_RISING: 

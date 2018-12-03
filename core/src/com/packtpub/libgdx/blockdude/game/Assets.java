@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 /**
  * Created by Philip Deppen (Milestone 1, 10/30/18)
  * Edited by Philip Deppen (Milestone 2, 11/12/18, issue 40)
+ * Edited by Philip Deppen (Milestone n/a, 12/3/18, issue 67)
  */
 public class Assets implements Disposable, AssetErrorListener
 {
@@ -25,15 +26,18 @@ public class Assets implements Disposable, AssetErrorListener
 	private AssetManager assetManager;
 	
 	public AssetBlockDude dude;
-	public AssetBlock block;
 	public AssetDoor door;
 	public AssetStar star;
 	public AssetBrokenBlock brokenBlock;
 	public AssetMovingBlock movingBlock;
 	public AssetGround ground;
-	public AssetCoin coin;
 	public AssetLevelDecoration levelDecoration;
 	public AssetFonts fonts;	
+	
+	/* coins and block share the same class (Coins) */
+	public AssetCoin coin;
+	public AssetBlock block;
+	
 	
 	// singleton: prevent instantiation from other classes
 	private Assets() {}

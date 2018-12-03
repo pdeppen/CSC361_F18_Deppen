@@ -104,8 +104,21 @@ public class CollisionHandler implements ContactListener
     		Coins coins = (Coins) dudeFixture.getBody().getUserData();
     		
     		coins.collected = true;
-    		worldController.score += coins.getScore();
-    		Gdx.app.log("CollisionHandler", "coin collected");
+    		
+    		if (coins.badBlock)
+    		{
+        		Gdx.app.log("CollisionHandler", "Bad block hit. Life lost");
+        		worldController.lives--;
+        		
+        		/* ends game if player hits a bad block and has no lives left */
+        		if (worldController.lives == 0)
+        			worldController.badBlockHit = true;
+    		}
+    		
+    		else if (coins.goodBlock) {
+        		Gdx.app.log("CollisionHandler", "Bad block hit. Life lost");
+        		worldController.score += coins.getScore();
+    		}
     }
     
     /**

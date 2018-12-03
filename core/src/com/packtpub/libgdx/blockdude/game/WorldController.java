@@ -62,6 +62,9 @@ public class WorldController extends InputAdapter
 	
 	private float timeLeftGameOverDelay;
 	
+	/* variable that ends game if last life is lost on block hit */
+	public boolean badBlockHit = false;
+	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/29/18)
 	 * Edited by Philip Deppen (Milestone 4, 11/30/18)
@@ -122,11 +125,12 @@ public class WorldController extends InputAdapter
 		{
 			handleInputGame(deltaTime);
 		}
+		
 		level.update(deltaTime);
 		b2world.step(deltaTime, 8, 3);
 		cameraHelper.update(deltaTime);
 		
-		if (!isGameOver() && isPlayerInWater())
+		if (!isGameOver() && (isPlayerInWater() || badBlockHit))
 		{
 			lives--;
 			if (isGameOver())

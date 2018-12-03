@@ -150,7 +150,7 @@ public class Level
 				// item block
 				else if (BLOCK_TYPE.ITEM_COIN.sameColor(currentPixel))
 				{
-					obj = new Coins();
+					obj = new Coins(true, baseHeight);
 			        offsetHeight = -1.5f;
 			        obj.position.set(pixelX,baseHeight * obj.dimension.y + offsetHeight);
 			        coins.add((Coins) obj);
