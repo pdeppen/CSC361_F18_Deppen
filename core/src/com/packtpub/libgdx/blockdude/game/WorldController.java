@@ -139,6 +139,7 @@ public class WorldController extends InputAdapter
 			}
 			else
 			{
+				Coins.drawBadBlock = 0;
 				initLevel();
 			}
 		}
@@ -226,6 +227,7 @@ public class WorldController extends InputAdapter
 	{
 		// Reset game world
 		if (keycode == Keys.R) {
+			Coins.drawBadBlock = 0;
 			init();
 			Gdx.app.debug(TAG, "Game world resetted");
 		}
@@ -390,6 +392,8 @@ public class WorldController extends InputAdapter
 	 */
 	private void backToMenu()
 	{
+		Coins.drawBadBlock = 0;
+
 		// switch to menu screen
 		game.setScreen(new MenuScreen(game));
 	}
