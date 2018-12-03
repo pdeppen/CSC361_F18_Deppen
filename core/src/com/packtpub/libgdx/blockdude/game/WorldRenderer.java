@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.packtpub.libgdx.blockdude.util.Constants;
 import com.packtpub.libgdx.blockdude.util.GamePreferences;
@@ -178,9 +179,26 @@ public class WorldRenderer implements Disposable
     		if (GamePreferences.instance.showFpsCounter)
     			renderGuiFpsCounter(batch);
     		
+    		renderGuiGameOverMessage(batch);
+    		
     		batch.end();
     }
     
+    /**
+     * Created by Philip Deppen (Milestone n/a, 12/3/18, issue 57)
+     */
+    private void renderGuiGameOverMessage(SpriteBatch batch)
+    {
+		float x = cameraGUI.viewportWidth / 2;
+		float y = cameraGUI.viewportHeight / 2;
+		if (worldController.isGameOver()) 
+		{
+			BitmapFont fontGameOver = Assets.instance.fonts.defaultBig;
+			fontGameOver.setColor(1, 0.75f, 0.25f, 1);
+			fontGameOver.draw(batch, "GAME OVER", x, y, 0, Align.center, false);		// need to fix alignment center
+			fontGameOver.setColor(1, 1, 1, 1);
+		}
+    }
     
     /**
      * Created by Philip Deppen (Milestone 1, 10/29/18)

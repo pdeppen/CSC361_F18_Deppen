@@ -39,6 +39,7 @@ import com.packtpub.libgdx.blockdude.game.objects.Dude.JUMP_STATE;
  * Edited by Philip Deppen (Milestone 3, 11/18/18, issue 47)
  * Edited by Philip Deppen (Milestone 3, 11/19/18, issue 46)
  * Edited by Philip Deppen (Milestone 4, 11/30/18)
+ * Edited by Philip Deppen (Milestone N/A, 12/3/18, issue 57)
  * contains game logic
  */
 public class WorldController extends InputAdapter
@@ -59,6 +60,8 @@ public class WorldController extends InputAdapter
 	
 	private Game game;
 	
+	private float timeLeftGameOverDelay;
+	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/29/18)
 	 * Edited by Philip Deppen (Milestone 4, 11/30/18)
@@ -73,6 +76,7 @@ public class WorldController extends InputAdapter
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/29/18)
 	 * Edited by Philip Deppen (Milestone 2, 11/6/18, issue 29)
+	 * Edited by Philip Deppen (Milestone N/A, 12/3/18, issue 57)
 	 * used for reseting game objects instead of making new ones
 	 */
 	private void init()
@@ -80,6 +84,7 @@ public class WorldController extends InputAdapter
 		Gdx.input.setInputProcessor(this);
 		cameraHelper = new CameraHelper();
 		lives = Constants.LIVES_START;
+		timeLeftGameOverDelay = 0;
 		initLevel();
 	}
 	
@@ -98,20 +103,61 @@ public class WorldController extends InputAdapter
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/29/18)
 	 * Edited by Philip Deppen (Milestone 3, 11/19/18, issue 46)
+	 * Edited by Philip Deppen (Milestone N/A, 12/3/18, issue 57)
 	 * contains game logic is called several hundred times per second
 	 * @param deltaTime
 	 */
 	public void update (float deltaTime)
 	{
 		handleDebugInput(deltaTime);
+				
 		/* need to add code from page 234 */
-		handleInputGame(deltaTime);
+		if (isGameOver())
+		{
+			timeLeftGameOverDelay -= deltaTime;
+			if (timeLeftGameOverDelay < 0)
+				backToMenu();				
+		}
+		else
+		{
+			handleInputGame(deltaTime);
+		}
 		level.update(deltaTime);
 		b2world.step(deltaTime, 8, 3);
 		cameraHelper.update(deltaTime);
+		
+		if (!isGameOver() && isPlayerInWater())
+		{
+			lives--;
+			if (isGameOver())
+			{
+				timeLeftGameOverDelay = Constants.TIME_LEFT_GAME_OVER;
+			}
+			else
+			{
+				initLevel();
+			}
+		}
 	}
 	
-		
+	/**
+	 * Created by Philip Deppen (Milestone N/A, 12/3/18, issue 57)
+	 */
+	public boolean isGameOver()
+	{
+		return lives < 0;
+	}
+	
+	/**
+	 * Created by Philip Deppen (Milestone N/A, 12/3/18, issue 57)
+	 */
+	public boolean isPlayerInWater()
+	{
+		return Level.dude.position.y < -5;
+	}
+	
+	
+	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18, issue 13)
 	 * Edited by Philip Deppen (Milestone 3, 11/19/18, issue 46)

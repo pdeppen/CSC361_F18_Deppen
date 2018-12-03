@@ -4,6 +4,7 @@ package com.packtpub.libgdx.blockdude.util;
  * Created by Philip Deppen (Milestone 1, 10/29/18)
  * Edited by Philip Deppen (Milestone 2, 11/6/18, issue 27)
  * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 49)
+ * Edited by Philip Deppen (Milestone N/A, 12/3/18, issue 57)
  * holds values that are fixed throughout project
  */
 public class Constants 
@@ -41,4 +42,9 @@ public class Constants
 	public static final String SKIN_BLOCKDUDE_UI ="images-ui/blockdude-ui.json"; 
 
 	public static final String PREFERENCES = "Blockdude.prefs";
+	
+	// delay after game over 
+	public static final float TIME_LEFT_GAME_OVER = 3;
+	
+	
 }
