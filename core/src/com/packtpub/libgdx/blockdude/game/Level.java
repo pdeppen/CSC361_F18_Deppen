@@ -223,7 +223,7 @@ public class Level
 	public void update (float deltaTime)
 	{
 		dude.update(deltaTime);
-		
+				
 		for (Ground grnd : ground)
 			grnd.update(deltaTime);
 		
@@ -232,5 +232,8 @@ public class Level
 		
 		for (Star star : stars)
 			star.update(deltaTime);
+		
+		ufos.update(deltaTime);
+
 	}
 }

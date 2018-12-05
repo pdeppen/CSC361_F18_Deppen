@@ -45,6 +45,10 @@ public class Ufos extends AbstractGameObject
 		}
 	}
 	
+	/**
+	 * Edited by Philip Deppen (Milestone 5, 12/5/18, issue 70)
+	 * @return
+	 */
 	private Ufo spawnUfo ()
 	{
 		Ufo ufo = new Ufo();
@@ -59,8 +63,40 @@ public class Ufos extends AbstractGameObject
 		pos.y += 4; // base position
 		pos.y += MathUtils.random(0.0f, 0.2f) * (MathUtils.randomBoolean() ? 1 : -1); // random additional position
 		ufo.position.set(pos);
+		
+		// speed
+		Vector2 speed = new Vector2();
+		speed.x += 1.5f; // base speed
+		
+		// random additional speed
+		speed.x += MathUtils.random(0.0f, 0.75f); 
+		ufo.terminalVelocity.set(speed); 
+		speed.x *= -1; // move left 
+		ufo.velocity.set(speed);
+		
 		return ufo;
 		
+	}
+	
+	/**
+	 * Created by Philip Deppen (Milestone 5, 12/5/18, issue 70)
+	 */
+	@Override
+	public void update (float deltaTime)
+	{
+		for (int i = ufos.size - 1; i>= 0; i--) 
+		{
+			Ufo ufo = ufos.get(i);
+			ufo.update(deltaTime);
+			if (ufo.position.x < -10)
+			{
+   				// ufo moved outside of world
+	    	   		// destroy and spawn new cloud at end of level
+	    	   		ufos.removeIndex(i);
+	    	   		ufos.add(spawnUfo());
+			}
+		}		
+
 	}
 	
 	@Override
@@ -89,7 +125,7 @@ public class Ufos extends AbstractGameObject
 		{
 			TextureRegion reg = regUfo;
 			
-			 batch.draw(reg.getTexture(), position.x + origin.x, position.y + origin.y, origin.x, origin.y, dimension.x, dimension.y, scale.x, 
+			 batch.draw(reg.getTexture(), position.x + origin.x, position.y + origin.y + 1.0f, origin.x, origin.y, dimension.x, dimension.y, scale.x, 
 					   scale.y, rotation, reg.getRegionX(), reg.getRegionY(), reg.getRegionWidth(), reg.getRegionHeight(), false, false);
 		}
 	}

@@ -143,6 +143,7 @@ public class WorldController extends InputAdapter
 				initLevel();
 			}
 		}
+		
 	}
 	
 	/**

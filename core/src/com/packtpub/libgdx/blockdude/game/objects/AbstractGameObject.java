@@ -51,19 +51,20 @@ public abstract class AbstractGameObject
      * Created by Philip Deppen (Milestone 2, 11/5/18, issue 21)
      * Edited by Philip Deppen (Milestone 3, 11/13/18, issue 43)
      * Edited by Philip Deppen (Milestone 3, 11/26/18, issue 50)
+     * Edited by Philip Deppen (Milestone 5, 12/5/18, issue 70)
      * @param deltaTime
      */
     public void update (float deltaTime)
     {
 		if (body == null)
 		{	
-			//updateMotionX(deltaTime);
-			//updateMotionY(deltaTime);
+			updateMotionX(deltaTime);
+			updateMotionY(deltaTime);
 			// Move to new position
-			//position.x += velocity.x * deltaTime;
-			//System.out.println("position x: " + position.x);
-			//position.y += velocity.y * deltaTime;
-			//System.out.println("position y: " + position.y);
+			position.x += velocity.x * deltaTime;
+			System.out.println("position x: " + position.x);
+			position.y += velocity.y * deltaTime;
+			System.out.println("position y: " + position.y);
 		}
 		else
 		{
