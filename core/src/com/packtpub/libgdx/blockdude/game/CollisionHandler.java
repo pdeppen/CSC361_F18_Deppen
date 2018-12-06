@@ -9,6 +9,7 @@ import com.packtpub.libgdx.blockdude.game.objects.AbstractGameObject;
 import com.packtpub.libgdx.blockdude.game.objects.Coins;
 import com.packtpub.libgdx.blockdude.game.objects.Dude;
 import com.packtpub.libgdx.blockdude.game.objects.Dude.JUMP_STATE;
+import com.packtpub.libgdx.blockdude.util.AudioManager;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
 import com.packtpub.libgdx.blockdude.game.objects.Star;
 import com.badlogic.gdx.Application.ApplicationType;
@@ -38,6 +39,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 
 /**
  * Created by Philip Deppen (Milestone 3, 11/18/18, issue 47)
+ * Edited by Philp Deppen (Milestone 5, 12/6/18, issue 73)
  */
 public class CollisionHandler implements ContactListener 
 {
@@ -90,6 +92,7 @@ public class CollisionHandler implements ContactListener
     		Dude dude = (Dude) starFixture.getBody().getUserData();
     		Star star = (Star) dudeFixture.getBody().getUserData();
     		
+    		AudioManager.instance.play(Assets.instance.sounds.pickupStar);
     		star.collected = true;
     		worldController.level.dude.setStarPowerup(true);
     		Gdx.app.log(this.getClass().getName(), "star collected");
@@ -107,6 +110,7 @@ public class CollisionHandler implements ContactListener
     		
     		if (coins.badBlock)
     		{
+    			AudioManager.instance.play(Assets.instance.sounds.liveLost);
         		Gdx.app.log("CollisionHandler", "Bad block hit. Life lost");
         		worldController.lives--;
         		
@@ -116,6 +120,7 @@ public class CollisionHandler implements ContactListener
     		}
     		
     		else if (coins.goodBlock) {
+    			AudioManager.instance.play(Assets.instance.sounds.pickupCoin);
         		Gdx.app.log("CollisionHandler", "Bad block hit. Life lost");
         		worldController.score += coins.getScore();
     		}

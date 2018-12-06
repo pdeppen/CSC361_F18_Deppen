@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.Array;
+import com.packtpub.libgdx.blockdude.util.AudioManager;
 import com.packtpub.libgdx.blockdude.util.CameraHelper;
 import com.packtpub.libgdx.blockdude.game.Assets;
 import com.badlogic.gdx.InputAdapter;
@@ -26,6 +27,7 @@ import com.packtpub.libgdx.blockdude.game.objects.Ground;
 import com.packtpub.libgdx.blockdude.game.objects.Star;
 import com.packtpub.libgdx.blockdude.screens.MenuScreen;
 import com.packtpub.libgdx.blockdude.util.Constants;
+import com.packtpub.libgdx.blockdude.util.GamePreferences;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
 import com.packtpub.libgdx.blockdude.game.objects.Coins;
 import com.packtpub.libgdx.blockdude.game.objects.Dude;
@@ -40,6 +42,7 @@ import com.packtpub.libgdx.blockdude.game.objects.Dude.JUMP_STATE;
  * Edited by Philip Deppen (Milestone 3, 11/19/18, issue 46)
  * Edited by Philip Deppen (Milestone 4, 11/30/18)
  * Edited by Philip Deppen (Milestone N/A, 12/3/18, issue 57)
+ * Edited by Philp Deppen (Milestone 5, 12/6/18, issue 73)
  * contains game logic
  */
 public class WorldController extends InputAdapter
@@ -107,6 +110,7 @@ public class WorldController extends InputAdapter
 	 * Created by Philip Deppen (Milestone 1, 10/29/18)
 	 * Edited by Philip Deppen (Milestone 3, 11/19/18, issue 46)
 	 * Edited by Philip Deppen (Milestone N/A, 12/3/18, issue 57)
+	 * Edited by Philp Deppen (Milestone 5, 12/6/18, issue 73)
 	 * contains game logic is called several hundred times per second
 	 * @param deltaTime
 	 */
@@ -132,6 +136,7 @@ public class WorldController extends InputAdapter
 		
 		if (!isGameOver() && (isPlayerInWater() || badBlockHit))
 		{
+			AudioManager.instance.play(Assets.instance.sounds.liveLost);
 			lives--;
 			if (isGameOver())
 			{
@@ -394,7 +399,11 @@ public class WorldController extends InputAdapter
 	private void backToMenu()
 	{
 		Coins.drawBadBlock = 0;
-
+		
+		// load preferences for audio settings and start playing music
+		GamePreferences.instance.load();
+		AudioManager.instance.play(Assets.instance.music.song01);
+		
 		// switch to menu screen
 		game.setScreen(new MenuScreen(game));
 	}

@@ -204,6 +204,9 @@ public class MenuScreen extends AbstractGameScreen
     //Tyler Major added from page 248
     private void onPlayClicked() 
     {
+		// load preferences for audio settings and start playing music
+		//GamePreferences.instance.load();
+		AudioManager.instance.stopMusic();
     		game.setScreen(new GameScreen(game));
     }
     

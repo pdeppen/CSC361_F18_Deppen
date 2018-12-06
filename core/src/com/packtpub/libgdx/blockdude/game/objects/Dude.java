@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.packtpub.libgdx.blockdude.game.Assets;
 import com.packtpub.libgdx.blockdude.game.Level;
 import com.packtpub.libgdx.blockdude.util.Constants;
+import com.packtpub.libgdx.blockdude.util.AudioManager;
 import com.packtpub.libgdx.blockdude.util.CharacterSkin;
 import com.packtpub.libgdx.blockdude.util.GamePreferences;
 
@@ -87,6 +88,7 @@ public class Dude extends AbstractGameObject
 			case GROUNDED: 
 				if (jumpKeyPressed)
 				{
+					AudioManager.instance.play(Assets.instance.sounds.jump);
 					timeJumping = 0;
 					jumpState = JUMP_STATE.JUMP_RISING;
 					/* edit second argument to change jump height */

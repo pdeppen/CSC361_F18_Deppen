@@ -48,15 +48,21 @@ public class Assets implements Disposable, AssetErrorListener
 	private Assets() {}
 	
 	/**
-	 * Created by Philip Deppen (Milestone 5, 12/5/18, issue 72)
+	 * Created by Philip Deppen (Milestone 5, 12/5/18, issue 73)
 	 */
 	public class AssetSounds {
-//		public final Sound jump;
-//		public final Sound jumpWithFeather;
-//		public final Sound pickupCoin;
-//		public final Sound pickupStar;
-//		public final Sound liveLost;
+		public final Sound jump;
+		public final Sound pickupCoin;
+		public final Sound pickupStar;
+		public final Sound liveLost;
 		
+		public AssetSounds(AssetManager am) 
+		{
+			jump = am.get("sounds/jump.wav");
+			pickupCoin = am.get("sounds/coin.wav");
+			pickupStar = am.get("sounds/star.wav");
+			liveLost = am.get("sounds/livelost.wav");
+		}
 	}
 	
 	/**
@@ -90,6 +96,12 @@ public class Assets implements Disposable, AssetErrorListener
 		// load music
 	    assetManager.load("music/music.mp3", Music.class);
 		
+	    // load sounds
+	    assetManager.load("sounds/jump.wav", Sound.class);
+		assetManager.load("sounds/coin.wav", Sound.class);
+		assetManager.load("sounds/star.wav", Sound.class);
+		assetManager.load("sounds/livelost.wav", Sound.class);
+		
 	    // start loading assets and wait until finished
 		assetManager.finishLoading();
 		
@@ -118,6 +130,7 @@ public class Assets implements Disposable, AssetErrorListener
 		levelDecoration = new AssetLevelDecoration(atlas);
 		
 		music = new AssetMusic(assetManager);
+		sounds = new AssetSounds(assetManager);
 	}
 	
 	/**
