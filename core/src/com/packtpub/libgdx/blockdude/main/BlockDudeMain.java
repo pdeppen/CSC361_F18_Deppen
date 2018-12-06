@@ -18,10 +18,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.packtpub.libgdx.blockdude.game.Assets;
 import com.packtpub.libgdx.blockdude.screens.MenuScreen;
+import com.packtpub.libgdx.blockdude.util.AudioManager;
+import com.packtpub.libgdx.blockdude.util.GamePreferences;
 
 /**
  * Created by Philip Deppen (Milestone 1, 10/29/18)
  * Edited by Philip Deppen (Milestone 4, 11/30/18, issue 59)
+ * Edited by Philip Deppen (Milestone 5, 12/5/18, issue 72)
  * Contains game loop and handles major aspects of game
  */
 public class BlockDudeMain extends Game {
@@ -29,6 +32,7 @@ public class BlockDudeMain extends Game {
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/29/18)
 	 * Edited by Philip Deppen (Milestone 4, 11/30/18, issue 59)
+	 * Edited by Philip Deppen (Milestone 5, 12/5/18, issue 72)
 	 */
 	@Override
 	public void create() {
@@ -37,6 +41,10 @@ public class BlockDudeMain extends Game {
 		
 		// load assets
 		Assets.instance.init(new AssetManager());
+		
+		// load preferences for audio settings and start playing music
+		GamePreferences.instance.load();
+		AudioManager.instance.play(Assets.instance.music.song01);
 		
 		// Start game at menu screen
 		setScreen(new MenuScreen(this));

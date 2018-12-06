@@ -27,10 +27,12 @@ import com.packtpub.libgdx.blockdude.util.CharacterSkin;
 import com.packtpub.libgdx.blockdude.util.Constants;
 import com.packtpub.libgdx.blockdude.util.GamePreferences;
 import com.packtpub.libgdx.blockdude.screens.GameScreen;
+import com.packtpub.libgdx.blockdude.util.AudioManager;
 
 /**
  * Created by Philip Deppen (Milestone 4, 11/30/18, issue 55)
  * Edited by Philip Deppen (Milestone 4, 12/1/18, issue 62)
+ * Edited by Philip Deppen (Milestone 5, 12/5/18, issue 72)
  */
 public class MenuScreen extends AbstractGameScreen
 {
@@ -294,21 +296,25 @@ public class MenuScreen extends AbstractGameScreen
     
     /**
      * Made by Philip Deppen (Assignment 6)
+     * Edited by Philip Deppen (Milestone 5, 12/5/18, issue 72)
      */
     private void onSaveClicked() 
     {
     		saveSettings();
     		onCancelClicked();
+    		AudioManager.instance.onSettingsUpdated();
     }
     
     /**
      * Made by Philip Deppen (Assignment 6)
+     * Created by Philip Deppen (Milestone 5, 12/5/18, issue 72)
      */
     private void onCancelClicked() 
     {
     		btnMenuPlay.setVisible(true);
     		btnMenuOptions.setVisible(true);
     		winOptions.setVisible(false);
+    		AudioManager.instance.onSettingsUpdated();
     }
     
 	/**

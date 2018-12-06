@@ -12,11 +12,14 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 
 /**
  * Created by Philip Deppen (Milestone 1, 10/30/18)
  * Edited by Philip Deppen (Milestone 2, 11/12/18, issue 40)
  * Edited by Philip Deppen (Milestone n/a, 12/3/18, issue 67)
+ * Edited by Philip Deppen (Milestone 5, 12/5/18, issue 72)
  */
 public class Assets implements Disposable, AssetErrorListener
 {
@@ -38,9 +41,35 @@ public class Assets implements Disposable, AssetErrorListener
 	public AssetCoin coin;
 	public AssetBlock block;
 	
+	public AssetSounds sounds;
+	public AssetMusic music;
 	
 	// singleton: prevent instantiation from other classes
 	private Assets() {}
+	
+	/**
+	 * Created by Philip Deppen (Milestone 5, 12/5/18, issue 72)
+	 */
+	public class AssetSounds {
+//		public final Sound jump;
+//		public final Sound jumpWithFeather;
+//		public final Sound pickupCoin;
+//		public final Sound pickupStar;
+//		public final Sound liveLost;
+		
+	}
+	
+	/**
+	 * Created by Philip Deppen (Milestone 5, 12/5/18, issue 72)
+	 */
+	public class AssetMusic {
+		public final Music song01;
+		
+		public AssetMusic (AssetManager am)
+		{
+			song01 = am.get("music/music.mp3", Music.class);
+		}
+	}
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
@@ -58,7 +87,10 @@ public class Assets implements Disposable, AssetErrorListener
 		// load texture atlas
 		assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
 		
-		// start loading assets and wait until finished
+		// load music
+	    assetManager.load("music/music.mp3", Music.class);
+		
+	    // start loading assets and wait until finished
 		assetManager.finishLoading();
 		
 		Gdx.app.debug(TAG, "# of assets loaded: " + assetManager.getAssetNames().size);
@@ -84,6 +116,8 @@ public class Assets implements Disposable, AssetErrorListener
 		ground = new AssetGround(atlas);
 		coin = new AssetCoin(atlas);
 		levelDecoration = new AssetLevelDecoration(atlas);
+		
+		music = new AssetMusic(assetManager);
 	}
 	
 	/**

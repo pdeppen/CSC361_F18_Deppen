@@ -102,7 +102,7 @@ public class CollisionHandler implements ContactListener
     {
     		Dude dude = (Dude) coinFixture.getBody().getUserData();
     		Coins coins = (Coins) dudeFixture.getBody().getUserData();
-    		
+    		    		
     		coins.collected = true;
     		
     		if (coins.badBlock)
