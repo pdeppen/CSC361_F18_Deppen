@@ -12,10 +12,14 @@ import com.packtpub.libgdx.blockdude.game.objects.Dude.JUMP_STATE;
 import com.packtpub.libgdx.blockdude.util.AudioManager;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
 import com.packtpub.libgdx.blockdude.game.objects.Star;
+import com.packtpub.libgdx.blockdude.game.objects.Trees;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
+
+import javax.swing.JOptionPane;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
@@ -82,6 +86,32 @@ public class CollisionHandler implements ContactListener
         {
         		processStarContact (fixtureA, fixtureB);
         }
+        
+        /* goal reached */
+        if (((objA instanceof Dude) && (objB instanceof Trees)))
+        {
+        		processGoalContact (fixtureA, fixtureB);
+        }
+        
+        if (((objA instanceof Trees) && (objB instanceof Dude)))
+        	{
+        		processGoalContact(fixtureB, fixtureA);
+        	}
+        
+        
+    }
+    
+    /**
+     * Created by Philip Deppen (Milestone 5, 12/17/18, issue 68)
+     */
+    private void processGoalContact(Fixture dudeFixture, Fixture treeFixture)
+    {
+		Dude dude = (Dude) dudeFixture.getBody().getUserData();
+		Trees goal = (Trees) treeFixture.getBody().getUserData();
+		
+		worldController.winner = true;
+		
+		System.out.println("Score: " + worldController.score);
     }
     
     /**
@@ -96,6 +126,8 @@ public class CollisionHandler implements ContactListener
     		star.collected = true;
     		worldController.level.dude.setStarPowerup(true);
     		Gdx.app.log(this.getClass().getName(), "star collected");
+
+    		worldController.resetLives = true;
     }
     
     /**

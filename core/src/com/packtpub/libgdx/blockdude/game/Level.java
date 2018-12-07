@@ -4,6 +4,7 @@ package com.packtpub.libgdx.blockdude.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Tree;
 import com.badlogic.gdx.utils.Array;
 import com.packtpub.libgdx.blockdude.game.objects.AbstractGameObject;
 import com.packtpub.libgdx.blockdude.game.objects.Background;
@@ -12,6 +13,7 @@ import com.packtpub.libgdx.blockdude.game.objects.Dude;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
 import com.packtpub.libgdx.blockdude.game.objects.Star;
 import com.packtpub.libgdx.blockdude.game.objects.Sun;
+import com.packtpub.libgdx.blockdude.game.objects.Trees;
 import com.packtpub.libgdx.blockdude.game.objects.Ufos;
 import com.packtpub.libgdx.blockdude.game.Level.BLOCK_TYPE;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
@@ -36,6 +38,7 @@ public class Level
 		GROUND (0, 255, 0), // green
 		PLAYER_SPAWNPOINT (255, 255, 255), // white
 		ITEM_STAR (255, 0, 255),
+		GOAL(236, 56, 56), // red
 		ITEM_COIN (255, 255, 0); // purple
 	
 		private int color;
@@ -66,6 +69,7 @@ public class Level
 	public Ufos ufos;
 	public Sun sun;
 	public Background background;
+	public static Trees goal;
 	
 	/**
 	 * Created by Philip Deppen (Milestone 2, 11/6/18, issue 26)
@@ -155,6 +159,15 @@ public class Level
 			        obj.position.set(pixelX,baseHeight * obj.dimension.y + offsetHeight);
 			        coins.add((Coins) obj);
 				}
+				// goal
+				else if (BLOCK_TYPE.GOAL.sameColor(currentPixel))
+				{
+					obj = new Trees();
+					offsetHeight = -7.0f;
+					obj.position.set(pixelX - 6.0f, baseHeight + offsetHeight);
+					goal = (Trees) obj;
+					
+				}
 				// unknown object/pixel color
 				else {
 					int r = 0xff & (currentPixel >>> 24); //red color channel
@@ -195,6 +208,8 @@ public class Level
 		
 		// draw background
 		background.render(batch);
+		
+		goal.render(batch);
 		
 		// draw coins
 		for (Coins coin : coins)

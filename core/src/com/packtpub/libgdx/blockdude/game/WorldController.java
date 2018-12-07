@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Disposable;
 import com.packtpub.libgdx.blockdude.util.AudioManager;
 import com.packtpub.libgdx.blockdude.util.CameraHelper;
 import com.packtpub.libgdx.blockdude.game.Assets;
@@ -25,6 +26,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input.Keys;
 import com.packtpub.libgdx.blockdude.game.objects.Ground;
 import com.packtpub.libgdx.blockdude.game.objects.Star;
+import com.packtpub.libgdx.blockdude.game.objects.Trees;
 import com.packtpub.libgdx.blockdude.screens.MenuScreen;
 import com.packtpub.libgdx.blockdude.util.Constants;
 import com.packtpub.libgdx.blockdude.util.GamePreferences;
@@ -45,7 +47,7 @@ import com.packtpub.libgdx.blockdude.game.objects.Dude.JUMP_STATE;
  * Edited by Philp Deppen (Milestone 5, 12/6/18, issue 73)
  * contains game logic
  */
-public class WorldController extends InputAdapter
+public class WorldController extends InputAdapter implements Disposable
 {
 	private static final String TAG = WorldController.class.getName();
 	
@@ -67,6 +69,10 @@ public class WorldController extends InputAdapter
 	
 	/* variable that ends game if last life is lost on block hit */
 	public boolean badBlockHit = false;
+	
+	public boolean winner = false;
+	
+	public boolean resetLives = false;
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/29/18)
@@ -119,7 +125,7 @@ public class WorldController extends InputAdapter
 		handleDebugInput(deltaTime);
 				
 		/* need to add code from page 234 */
-		if (isGameOver())
+		if (isGameOver() || winner)
 		{
 			timeLeftGameOverDelay -= deltaTime;
 			if (timeLeftGameOverDelay < 0)
@@ -147,6 +153,14 @@ public class WorldController extends InputAdapter
 				Coins.drawBadBlock = 0;
 				initLevel();
 			}
+		}
+		if (winner)
+		{
+			timeLeftGameOverDelay = Constants.TIME_LEFT_GAME_OVER;
+		}
+		if (this.resetLives)
+		{
+			this.lives = Constants.LIVES_START;
 		}
 		
 	}
@@ -350,6 +364,24 @@ public class WorldController extends InputAdapter
 		fixtureDef.shape = polygonShape;
 		body.createFixture(fixtureDef);
 		polygonShape.dispose();
+		
+		/* goal (tree) body */
+		Trees goal = Level.goal;
+		bodyDef = new BodyDef();
+		bodyDef.type = BodyType.StaticBody;
+		bodyDef.position.set(goal.position);
+		body = b2world.createBody(bodyDef);
+		body.setUserData(goal);	
+		goal.body = body;
+		polygonShape = new PolygonShape();
+		origin.x = goal.bounds.width / 2.0f;
+		origin.y = goal.bounds.height / 2.0f;
+		polygonShape.setAsBox(goal.bounds.width / 2.0f, goal.bounds.height / 2.0f,origin, 0);
+		fixtureDef = new FixtureDef();
+		fixtureDef.shape = polygonShape;
+		fixtureDef.isSensor = true;
+		body.createFixture(fixtureDef);
+		polygonShape.dispose();	
         		
 	}
 	
@@ -406,6 +438,13 @@ public class WorldController extends InputAdapter
 		
 		// switch to menu screen
 		game.setScreen(new MenuScreen(game));
+	}
+
+	@Override
+	public void dispose() 
+	{
+		if (b2world != null)
+			b2world.dispose();
 	}
 	
 }

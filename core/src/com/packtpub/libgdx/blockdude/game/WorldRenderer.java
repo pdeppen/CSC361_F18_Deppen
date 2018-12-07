@@ -175,11 +175,15 @@ public class WorldRenderer implements Disposable
     		// draw lives left
     		renderGuiExtraLives(batch);
     		
+    		if (worldController.resetLives)
+    			worldController.resetLives = false;
+    		
     		// draw fps
     		if (GamePreferences.instance.showFpsCounter)
     			renderGuiFpsCounter(batch);
     		
     		renderGuiGameOverMessage(batch);
+    		renderGuiWinnerMessage(batch);
     		
     		batch.end();
     }
@@ -196,6 +200,22 @@ public class WorldRenderer implements Disposable
 			BitmapFont fontGameOver = Assets.instance.fonts.defaultBig;
 			fontGameOver.setColor(1, 0.75f, 0.25f, 1);
 			fontGameOver.draw(batch, "GAME OVER", x, y, 0, Align.center, false);		// need to fix alignment center
+			fontGameOver.setColor(1, 1, 1, 1);
+		}
+    }
+    
+    /**
+     * Created by Philip Deppen (Milestone 5, 12/7/18, issue 68)
+     */
+    private void renderGuiWinnerMessage(SpriteBatch batch)
+    {
+		float x = cameraGUI.viewportWidth / 2;
+		float y = cameraGUI.viewportHeight / 2;
+		if (worldController.winner) 
+		{
+			BitmapFont fontGameOver = Assets.instance.fonts.defaultBig;
+			fontGameOver.setColor(1, 0.75f, 0.25f, 1);
+			fontGameOver.draw(batch, "WINNER!", x, y, 0, Align.center, false);		// need to fix alignment center
 			fontGameOver.setColor(1, 1, 1, 1);
 		}
     }
