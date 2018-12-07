@@ -14,6 +14,8 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * Created by Philip Deppen (Milestone 1, 10/30/18)
@@ -171,15 +173,26 @@ public class Assets implements Disposable, AssetErrorListener
 	
 	/**
 	 * Created by Philip Deppen (Milestone 1, 10/30/18)
+	 * Edited by Philip Deppen (Milestone 5, 12/6/18, issue 74)
 	 * inner class
 	 */
 	public class AssetBlock
 	{
 		public final AtlasRegion block;
+		public final Animation animBlock;
 		
 		public AssetBlock (TextureAtlas atlas)
 		{
 			block = atlas.findRegion("block");
+			
+			// Animation: Block
+			Array<AtlasRegion> regions = atlas.findRegions("anim_block");
+			AtlasRegion region = regions.first();
+			
+			for (int i = 0; i < 10; i++)
+				regions.insert(0, region);
+			
+			animBlock = new Animation(1.0f / 4.0f, regions, Animation.PlayMode.LOOP);
 		}
 	}
 	

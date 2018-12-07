@@ -25,7 +25,7 @@ public class WorldRenderer implements Disposable
     private WorldController worldController;
     private OrthographicCamera cameraGUI;
     
-    private static final boolean DEBUG_DRAW_BOX2D_WORLD = true;
+    private static final boolean DEBUG_DRAW_BOX2D_WORLD = false;
     private Box2DDebugRenderer b2debugRenderer;
     
     /**

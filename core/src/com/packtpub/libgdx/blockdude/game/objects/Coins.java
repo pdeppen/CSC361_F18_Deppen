@@ -3,6 +3,7 @@ package com.packtpub.libgdx.blockdude.game.objects;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.packtpub.libgdx.blockdude.game.Assets;
+import com.badlogic.gdx.math.MathUtils;
 
 /**
  * Created by Philip Deppen (Milestone 3, 11/13/18, issue 44)
@@ -35,6 +36,9 @@ public class Coins extends AbstractGameObject
 	 */
 	private void init(boolean drawBlock, float height) 
 	{
+		setAnimation(Assets.instance.block.animBlock);
+		stateTime = MathUtils.random(0.0f, 1.0f);
+				
 		drawBadBlock++;
 		dimension.set(0.5f, 0.5f);
 		
@@ -62,10 +66,16 @@ public class Coins extends AbstractGameObject
 	 */
 	public void render (SpriteBatch batch) 
 	{
-		if (collected) return;
-		
 		TextureRegion reg = null;
+
 		reg = regCoin;
+
+		if (collected) return; //reg = (TextureRegion) animation.getKeyFrame(stateTime, true);
+		
+		else if (this.badBlock)
+			reg = (TextureRegion) animation.getKeyFrame(stateTime, true);
+		
+		//reg = (TextureRegion) animation.getKeyFrame(stateTime, true);
 		
 		batch.draw(reg.getTexture(), position.x, position.y,
 				   origin.x, origin.y, dimension.x + 0.5f, dimension.y + 0.5f, scale.x, scale.y,

@@ -1,5 +1,6 @@
 package com.packtpub.libgdx.blockdude.game.objects;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -29,6 +30,14 @@ public abstract class AbstractGameObject
     
     public Body body;
     
+    public float stateTime;
+    public Animation animation;
+    
+    public void setAnimation (Animation animation)
+    {
+    		this.animation = animation;
+    		stateTime = 0;
+    }
     /**
      * Created by Philip Deppen (Milestone 2, 11/5/18, issue 21)
      * Edited by Philip Deppen (Milestone 3, 11/12/18, issue 41)
@@ -56,6 +65,8 @@ public abstract class AbstractGameObject
      */
     public void update (float deltaTime)
     {
+    		stateTime += deltaTime;
+    		
 		if (body == null)
 		{	
 			updateMotionX(deltaTime);
