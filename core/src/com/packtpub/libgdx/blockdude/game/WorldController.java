@@ -21,6 +21,19 @@ import com.packtpub.libgdx.blockdude.util.AudioManager;
 import com.packtpub.libgdx.blockdude.util.CameraHelper;
 import com.packtpub.libgdx.blockdude.game.Assets;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.files.FileHandle;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input.Keys;
@@ -445,6 +458,74 @@ public class WorldController extends InputAdapter implements Disposable
 	{
 		if (b2world != null)
 			b2world.dispose();
+	}
+	
+	/**
+	 * Created by Philip Deppen (Milestone 5, 12/7/18, issue 75)
+	 */
+	public void displayHighScores()
+	{
+		JFrame f = new JFrame(); 
+		JTable j;
+		
+        // Frame Title 
+        f.setTitle("Highscores"); 
+				
+		/* read in file and save in tempArray */
+		FileHandle handle = Gdx.files.local("highscores.txt");
+		String text = handle.readString();
+		String[] tempArray = text.split("\n");
+				
+		/* declare new int array */
+		int scoresArray[] = new int[tempArray.length];
+		
+		/* parse tempArray and save new int values in scoresArray */
+		for (int i = 0; i < tempArray.length; i++)
+		{
+			scoresArray[i] = Integer.parseInt(tempArray[i]);
+			System.out.println(scoresArray[i]);
+		}
+		
+		/* sort array */
+		Arrays.sort(scoresArray);
+		
+		String data[][] = new String[scoresArray.length][scoresArray.length];
+				
+		/* print array in reverse order */
+		int tempCounter = 0;
+		String temp;
+		
+		for (int i = scoresArray.length - 1; i >= 0; i--)
+		{
+			//System.out.println(tempCounter + " : " + scoresArray[i]);
+			temp = Integer.toString(scoresArray[i]);
+			data[tempCounter][1] = temp;
+
+			temp = Integer.toString(tempCounter + 1);
+			data[tempCounter][0] = temp;
+			
+			System.out.println(data[tempCounter][1]);
+			System.out.println(data[tempCounter][0]);
+			tempCounter++;
+		}
+				   
+        // Column Names 
+        String[] columnNames = { "Place", "Scores"}; 
+  
+        // Initializing the JTable 
+        j = new JTable(data, columnNames); 
+        j.setBounds(30, 40, 200, 300); 
+  
+        // adding it to JScrollPane 
+        JScrollPane sp = new JScrollPane(j); 
+        f.add(sp); 
+        
+        // Frame Size 
+        f.setSize(500, 200); 
+        // Frame Visible = true 
+        f.setVisible(true);
+		
+	  
 	}
 	
 }

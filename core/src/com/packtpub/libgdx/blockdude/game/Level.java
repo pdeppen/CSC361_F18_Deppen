@@ -140,7 +140,7 @@ public class Level
 				{
 					obj = new Dude();
 					offsetHeight = -8.0f;
-					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
+					obj.position.set(pixelX + 90.0f, baseHeight * obj.dimension.y + offsetHeight);
 					dude = (Dude) obj;
 				}
 				// item star
@@ -164,7 +164,7 @@ public class Level
 				{
 					obj = new Trees();
 					offsetHeight = -7.0f;
-					obj.position.set(pixelX - 6.0f, baseHeight + offsetHeight);
+					obj.position.set(pixelX - 5.5f, baseHeight + offsetHeight);
 					goal = (Trees) obj;
 					
 				}
