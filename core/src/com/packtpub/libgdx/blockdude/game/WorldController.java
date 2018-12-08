@@ -463,7 +463,7 @@ public class WorldController extends InputAdapter implements Disposable
 	/**
 	 * Created by Philip Deppen (Milestone 5, 12/7/18, issue 75)
 	 */
-	public void displayHighScores()
+	public static void displayHighScores()
 	{
 		JFrame f = new JFrame(); 
 		JTable j;

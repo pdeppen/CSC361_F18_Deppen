@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.packtpub.libgdx.blockdude.game.Assets;
+import com.packtpub.libgdx.blockdude.game.WorldController;
 import com.packtpub.libgdx.blockdude.util.CharacterSkin;
 import com.packtpub.libgdx.blockdude.util.Constants;
 import com.packtpub.libgdx.blockdude.util.GamePreferences;
@@ -53,6 +54,7 @@ public class MenuScreen extends AbstractGameScreen
     private Window winOptions;
     private TextButton btnWinOptSave;
     private TextButton btnWinOptCancel;
+    private TextButton btnWinOptHighScores;
     private CheckBox chkSound;
     private Slider sldSound;
     private CheckBox chkMusic;
@@ -445,6 +447,15 @@ public class MenuScreen extends AbstractGameScreen
 	    		@Override
 	    		public void changed (ChangeEvent event, Actor actor) {
 	    			onCancelClicked();
+	    		}
+	    });
+	    
+	    btnWinOptHighScores = new TextButton("High Scores", skinLibgdx);
+	    tbl.add(btnWinOptHighScores);
+	    btnWinOptHighScores.addListener(new ChangeListener() {
+	    		@Override
+	    		public void changed(ChangeEvent event, Actor actor) {
+	    			WorldController.displayHighScores();
 	    		}
 	    });
 	    
