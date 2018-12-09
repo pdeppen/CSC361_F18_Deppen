@@ -112,7 +112,7 @@ public class CollisionHandler implements ContactListener
 		worldController.winner = true;
 		
 		System.out.println("Score: " + worldController.score);
-		worldController.displayHighScores();
+		worldController.writeScore();
     }
     
     /**

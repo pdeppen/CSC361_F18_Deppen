@@ -23,8 +23,13 @@ import com.packtpub.libgdx.blockdude.game.Assets;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.files.FileHandle;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
@@ -465,6 +470,8 @@ public class WorldController extends InputAdapter implements Disposable
 	 */
 	public static void displayHighScores()
 	{
+		System.out.println("Displaying High Scores...");
+		
 		JFrame f = new JFrame(); 
 		JTable j;
 		
@@ -504,8 +511,6 @@ public class WorldController extends InputAdapter implements Disposable
 			temp = Integer.toString(tempCounter + 1);
 			data[tempCounter][0] = temp;
 			
-			System.out.println(data[tempCounter][1]);
-			System.out.println(data[tempCounter][0]);
 			tempCounter++;
 		}
 				   
@@ -524,8 +529,29 @@ public class WorldController extends InputAdapter implements Disposable
         f.setSize(500, 200); 
         // Frame Visible = true 
         f.setVisible(true);
-		
-	  
+        
 	}
 	
+	/**
+	 * Created by Philip Deppen (Milestone 5, 12/8/18, issue 75)
+	 * writes score to text file after the user reaches the finish line
+	 */
+	public void writeScore() 
+	{
+		try {
+			FileWriter fileWriter = new FileWriter("../core/assets/highscores.txt", true);
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			bufferedWriter.write(this.score + "\n");
+			bufferedWriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		
+		
+		
+		
+		
+	}
 }

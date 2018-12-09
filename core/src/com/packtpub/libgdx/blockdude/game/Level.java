@@ -140,7 +140,7 @@ public class Level
 				{
 					obj = new Dude();
 					offsetHeight = -8.0f;
-					obj.position.set(pixelX + 90.0f, baseHeight * obj.dimension.y + offsetHeight);
+					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
 					dude = (Dude) obj;
 				}
 				// item star
