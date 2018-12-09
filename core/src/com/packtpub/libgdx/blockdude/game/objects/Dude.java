@@ -10,11 +10,13 @@ import com.packtpub.libgdx.blockdude.util.Constants;
 import com.packtpub.libgdx.blockdude.util.AudioManager;
 import com.packtpub.libgdx.blockdude.util.CharacterSkin;
 import com.packtpub.libgdx.blockdude.util.GamePreferences;
-
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 /**
  * Created by Philip Deppen (Milestone 3, 11/12/18, issue 41)
  * Edited by Philip Deppen (Milestone 3, 11/13/18, issue 43)
  * Edited by Philip Deppen (Milestone 4, 12/1/18, issue 63)
+ * Edited by Philip Deppen (Milestone 5, 12/9/18, issue 71)
  */
 public class Dude extends AbstractGameObject
 {
@@ -24,6 +26,8 @@ public class Dude extends AbstractGameObject
 	private final float JUMP_TIME_MAX = 0.3f;
 	private final float JUMP_TIME_MIN = 0.1f;
 	private final float JUMP_TIME_OFFSET_FLYING = JUMP_TIME_MAX - 0.018f;
+	
+	public ParticleEffect dustParticles = new ParticleEffect();
 	
 	public enum VIEW_DIRECTION 
 	{ 
@@ -75,6 +79,11 @@ public class Dude extends AbstractGameObject
 		// power-ups
 		hasStarPowerup = false;
 		timeLeftStarPowerup = 0;		
+		
+		// particles
+		dustParticles.load(Gdx.files.internal("particles/dustParticle.pfx"), Gdx.files.internal("particles"));
+		
+		
 	}
 	
 	/**
@@ -83,9 +92,15 @@ public class Dude extends AbstractGameObject
 	 */
 	public void setJumping (boolean jumpKeyPressed)
 	{
+		dustParticles.setPosition(position.x + dimension.x / 2, position.y);
+		dustParticles.start();
 		switch (jumpState)
 		{
 			case GROUNDED: 
+				if (velocity.x == 0)
+				{
+					dustParticles.allowCompletion();
+				}
 				if (jumpKeyPressed)
 				{
 					AudioManager.instance.play(Assets.instance.sounds.jump);
@@ -155,6 +170,7 @@ public class Dude extends AbstractGameObject
 				setStarPowerup(false);
 			}
 		}
+		dustParticles.update(deltaTime);
 	}
 	
 	/**
@@ -191,8 +207,10 @@ public class Dude extends AbstractGameObject
 					velocity.y = terminalVelocity.y;
 				}
 		}
-		if (jumpState != JUMP_STATE.GROUNDED)
+		if (jumpState != JUMP_STATE.GROUNDED) {
+			dustParticles.allowCompletion();
 			super.updateMotionY(deltaTime);
+		}
 	}
 	
 	/**
@@ -204,6 +222,8 @@ public class Dude extends AbstractGameObject
 	public void render(SpriteBatch batch) 
 	{
 		TextureRegion reg = null;
+		
+		dustParticles.draw(batch);
 		
 		// apply skin color
 		batch.setColor(CharacterSkin.values() [GamePreferences.instance.charSkin].getColor());
